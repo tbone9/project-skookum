@@ -31,7 +31,7 @@ const getAllAthletes = async (req, res) => {
 
 const getOneAthlete = async (req, res) => {
     try {
-        const athlete = await Athlete.findById(req.params.id);
+        const athlete = await Athlete.findById(req.params.id).populate('sessions');
         return res.json({
             success: true,
             data: athlete

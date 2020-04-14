@@ -1,8 +1,16 @@
 const Session = require('../models/session');
+const Athlete = require('../models/athlete');
 
 const createSession = async (req, res) => {
     try {
+        //create the session
         const session = await Session.create(req.body);
+        // get one athlete and save the session to the athlete
+        const athlete = await Athlete.findById(req.body.athleteId);
+        console.log(athlete, 'athlete');
+        await athlete.sessions.push(session._id);
+        await athlete.save();
+
         return res.json(session);
     } catch (error) {
         return res.sendStatus(500).json({
@@ -63,7 +71,14 @@ const updateSession = async (req, res) => {
 
 const deleteSession = async (req, res) => {
     try {
-        await Session.findByIdAndRemove(req.params.id);
+        //Finds the session
+        const session = await Session.findById(req.params.id);
+        console.log(session, 'session');
+        // Finds the athlete associated with the session and removes the session id from the sessions array (no need to save())
+        await Athlete.update({ _id: session.athleteId }, { $pull: { sessions: req.params.id } });
+
+        await session.remove();
+
         return res.json({
             success: true,
             data: {}
