@@ -1,10 +1,9 @@
-const Athlete = require('../models/athlete');
-const request = require('request');
+const Session = require('../models/session');
 
-const createAthlete = async (req, res) => {
+const createSession = async (req, res) => {
     try {
-        const athlete = await Athlete.create(req.body);
-        return res.json(athlete);
+        const session = await Session.create(req.body);
+        return res.json(session);
     } catch (error) {
         return res.sendStatus(500).json({
             success: false,
@@ -13,13 +12,14 @@ const createAthlete = async (req, res) => {
     }
 }
 
-const getAllAthletes = async (req, res) => {
+const getAllSessions = async (req, res) => {
     try {
-        const athletes = await Athlete.find();
+        const sessions = await Session.find()
+            .populate('createdBy');
         return res.json({
             success: true,
-            count: athletes.length,
-            data: athletes
+            count: sessions.length,
+            data: sessions
         })
     } catch (error) {
         return res.sendStatus(500).json({
@@ -29,12 +29,12 @@ const getAllAthletes = async (req, res) => {
     }
 }
 
-const getOneAthlete = async (req, res) => {
+const getOneSession = async (req, res) => {
     try {
-        const athlete = await Athlete.findById(req.params.id);
+        const session = await Session.findById(req.params.id).populate('createdBy');
         return res.json({
             success: true,
-            data: athlete
+            data: session
         })
     } catch (error) {
         return res.sendStatus(500).json({
@@ -45,12 +45,12 @@ const getOneAthlete = async (req, res) => {
     }
 }
 
-const updateAthlete = async (req, res) => {
+const updateSession = async (req, res) => {
     try {
-        const athlete = await Athlete.findByIdAndUpdate(req.params.id, req.body, { new: true, useFindAndModify: false });
+        const session = await Session.findByIdAndUpdate(req.params.id, req.body, { new: true, useFindAndModify: false });
         return res.json({
             success: true,
-            data: athlete
+            data: session
         });
     } catch (error) {
         return res.sendStatus(500).json({
@@ -61,9 +61,9 @@ const updateAthlete = async (req, res) => {
     }
 }
 
-const deleteAthlete = async (req, res) => {
+const deleteSession = async (req, res) => {
     try {
-        await Athlete.findByIdAndRemove(req.params.id);
+        await Session.findByIdAndRemove(req.params.id);
         return res.json({
             success: true,
             data: {}
@@ -79,10 +79,10 @@ const deleteAthlete = async (req, res) => {
 
 
 module.exports = {
-    createAthlete,
-    getAllAthletes,
-    getOneAthlete,
-    deleteAthlete,
-    updateAthlete,
+    createSession,
+    getAllSessions,
+    getOneSession,
+    deleteSession,
+    updateSession,
 
 };

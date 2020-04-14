@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const AthleteSchema = new mongoose.Schema({
     firstName: {
@@ -23,8 +24,12 @@ const AthleteSchema = new mongoose.Schema({
     },
     zip: {
         type: Number
-    }
-})
+    },
+    sessions: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Session'
+    }]
+});
 
 
 module.exports = mongoose.model('Athlete', AthleteSchema);

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const Athlete = require('../../models/athlete');
 const athletesCtrl = require('../../controllers/athletes');
 
 /*---------- Public Routes ----------*/
