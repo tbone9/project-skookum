@@ -74,14 +74,14 @@ const deleteSession = async (req, res) => {
         //Finds the session
         const session = await Session.findById(req.params.id);
         console.log(session, 'session');
-        // Finds the athlete associated with the session and removes the session id from the sessions array (no need to save())
-        await Athlete.update({ _id: session.athleteId }, { $pull: { sessions: req.params.id } });
+        // Finds the athlete associated with the session and removes the session id from the sessions array
+        const athlete = await Athlete.findOneAndUpdate({ _id: session.athleteId }, { $pull: { sessions: req.params.id } });
 
         await session.remove();
 
         return res.json({
             success: true,
-            data: {}
+            data: athlete
         });
     } catch (error) {
         return res.sendStatus(500).json({

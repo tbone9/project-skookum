@@ -23,7 +23,7 @@ class LoginPage extends Component {
             await userService.login(this.state);
             // Let <App> know a user has signed up!
             this.props.handleSignupOrLogin();
-            // Successfully signed up - show GamePage
+            // Successfully signed up - show MainPage
             this.props.history.push('/');
         } catch (err) {
             // Use a modal or toast in your apps instead of alert
@@ -50,7 +50,7 @@ class LoginPage extends Component {
                         <div className="col-sm-12 text-center">
                             <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
               <Link to='/signup'>New user?</Link>
-                            <Link to='/'>Cancel</Link>
+                            {/* <Link to='/'>Cancel</Link> */}
                         </div>
                     </div>
                 </form>

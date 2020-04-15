@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import MainPage from '../MainPage/MainPage';
+import AthletePage from '../AthletePage/AthletePage';
 import userService from '../../utils/userService';
 import tokenService from '../../utils/tokenService';
 
@@ -49,6 +50,13 @@ class App extends Component {
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
             />
+          } />
+          <Route exact path='/athlete/:id' component={AthletePage}
+          // render={({ history }) =>
+          //   <AthletePage
+          //     {...this.props}
+          //     history={history}
+          />
           } />
         </Switch>
 

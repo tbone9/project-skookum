@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// const Session = require('./session');
 
 const AthleteSchema = new mongoose.Schema({
     firstName: {

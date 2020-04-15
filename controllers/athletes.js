@@ -1,5 +1,5 @@
 const Athlete = require('../models/athlete');
-const request = require('request');
+const Session = require('../models/session')
 
 const createAthlete = async (req, res) => {
     try {
@@ -63,7 +63,16 @@ const updateAthlete = async (req, res) => {
 
 const deleteAthlete = async (req, res) => {
     try {
-        await Athlete.findByIdAndRemove(req.params.id);
+        const athlete = await Athlete.findById(req.params.id);
+        console.log(athlete)
+        await Session.deleteMany(
+            {
+                _id: {
+                    $in: athlete.sessions
+                }
+            }
+        )
+        await athlete.remove();
         return res.json({
             success: true,
             data: {}
