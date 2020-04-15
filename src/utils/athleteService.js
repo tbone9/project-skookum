@@ -1,11 +1,11 @@
 const BASE_URL = '/api/athletes/';
 
-const createAthlete = async (e, athlete) => {
+const createAthlete = async (e, athleteToCreate) => {
     e.preventDefault();
     try {
         const athlete = await fetch(BASE_URL + 'create', {
             method: 'POST',
-            body: JSON.stringify(athlete),
+            body: JSON.stringify(athleteToCreate),
             headers: {
                 'Content-Type': 'application/json'
             }
