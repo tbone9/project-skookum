@@ -1,4 +1,8 @@
+import tokenService from './tokenService';
+
 const BASE_URL = '/api/athletes/';
+
+
 
 const createAthlete = async (e, athleteToCreate) => {
     e.preventDefault();
@@ -7,7 +11,8 @@ const createAthlete = async (e, athleteToCreate) => {
             method: 'POST',
             body: JSON.stringify(athleteToCreate),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
             }
         });
         const response = await athlete.json();
@@ -22,7 +27,8 @@ const fetchAthlete = async (id) => {
         const athlete = await fetch(BASE_URL + id, {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
             }
         });
         const response = await athlete.json();
@@ -37,7 +43,8 @@ const fetchAthletes = async () => {
         const athletes = await fetch(BASE_URL + 'all', {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
             }
         });
         const response = await athletes.json();
@@ -54,7 +61,8 @@ const editAthlete = async (e, athleteToUpdate, athleteId) => {
             method: 'PUT',
             body: JSON.stringify(athleteToUpdate),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
             }
         });
         const response = await athlete.json();
@@ -69,7 +77,8 @@ const deleteAthlete = async (athleteId) => {
         const athlete = await fetch(BASE_URL + athleteId, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
             }
         });
         const response = await athlete.json();
@@ -79,8 +88,16 @@ const deleteAthlete = async (athleteId) => {
     }
 }
 
-module.exports.createAthlete = createAthlete;
-module.exports.fetchAthlete = fetchAthlete;
-module.exports.fetchAthletes = fetchAthletes;
-module.exports.editAthlete = editAthlete;
-module.exports.deleteAthlete = deleteAthlete;
+export default {
+    createAthlete,
+    fetchAthlete,
+    fetchAthletes,
+    editAthlete,
+    deleteAthlete
+};
+
+// module.exports.createAthlete = createAthlete;
+// module.exports.fetchAthlete = fetchAthlete;
+// module.exports.fetchAthletes = fetchAthletes;
+// module.exports.editAthlete = editAthlete;
+// module.exports.deleteAthlete = deleteAthlete;

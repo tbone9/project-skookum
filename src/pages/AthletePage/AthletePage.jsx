@@ -20,7 +20,7 @@ class AthletePage extends Component {
     render() {
         const athlete = this.state.athlete;
         const sessions = this.state.athlete.sessions;
-        console.log(sessions)
+        console.log(sessions, 'sessions')
         return (
             <div>
                 <h2>Athlete Page</h2>
@@ -34,7 +34,7 @@ class AthletePage extends Component {
 
                     sessions.map(session => (
 
-                        <SessionCard session={session} />
+                        <SessionCard key={session._id} session={session} />
                     ))
                     : ''
                 }
