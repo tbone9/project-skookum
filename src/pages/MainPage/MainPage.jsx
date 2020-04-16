@@ -28,9 +28,7 @@ class MainPage extends Component {
     }
 
     hideAddAthlete = () => {
-
         this.setState({ showAddAthlete: false })
-
     }
 
     addAthlete = async (e, athlete) => {
@@ -39,6 +37,10 @@ class MainPage extends Component {
         console.log(athlete);
         const newAthlete = await athleteService.createAthlete(e, athlete);
         console.log(newAthlete);
+        //this setState adds the new athlete without fetching from db
+        this.setState(prevState => ({
+            athletes: [...prevState.athletes, newAthlete]
+        }));
     }
 
 

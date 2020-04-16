@@ -14,7 +14,6 @@ router.post('/create', checkAuth, athletesCtrl.createAthlete);
 router.put('/:id', checkAuth, athletesCtrl.updateAthlete);
 router.delete('/:id', checkAuth, athletesCtrl.deleteAthlete);
 
-
 /*----- Helper Functions -----*/
 function checkAuth(req, res, next) {
     if (req.user) return next();
