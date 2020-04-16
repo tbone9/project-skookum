@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../AddAthlete/styles.css';
 import userService from '../../utils/userService';
+import { Link } from 'react-router-dom';
 
 class AddSession extends Component {
     constructor() {
@@ -41,7 +42,7 @@ class AddSession extends Component {
                             <button type='submit' value='Add Session'>Add Session</button>
                         </div>
                         <div className='form-button'>
-                            <button onClick={this.props.handleClose}>Cancel</button>
+                            <Link onClick={this.props.handleClose} to={`/athlete/${this.props.athleteId}`} >Cancel</Link>
                         </div>
                     </div>
 

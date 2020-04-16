@@ -58,6 +58,7 @@ class AthletePage extends Component {
         return (
             <div>
                 <h2>Athlete Page</h2>
+
                 <h3>Name: {athlete.firstName} {athlete.lastName}</h3>
                 <h3>Address: {athlete.address}</h3>
                 <h3>{athlete.city}, {athlete.state} {athlete.zip}</h3>

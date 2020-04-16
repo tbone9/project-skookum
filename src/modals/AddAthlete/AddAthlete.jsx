@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './styles.css';
+import { Link } from 'react-router-dom';
 
 class AddAthlete extends Component {
     constructor() {
@@ -105,7 +106,7 @@ class AddAthlete extends Component {
                             <button type='submit' value='Add Athlete'>Add Athlete</button>
                         </div>
                         <div className='form-button'>
-                            <button onClick={this.props.handleClose}>Cancel</button>
+                            <Link onClick={this.props.handleClose} to={`/`} >Cancel</Link>
                         </div>
                     </div>
 
