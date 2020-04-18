@@ -78,6 +78,17 @@ class AthletePage extends Component {
         }))
     }
 
+    handleDeleteSession = async (sessionId) => {
+        // e.preventDefault();
+        // console.log(sessionId)
+        await sessionService.deleteSession(sessionId);
+        const newSessionArray = this.state.sessions.filter(session => session._id !== sessionId);
+
+        this.setState({
+            sessions: newSessionArray
+        })
+    }
+
     render() {
         const athlete = this.state.athlete;
         const sessions = this.state.sessions;
@@ -107,7 +118,7 @@ class AthletePage extends Component {
 
                 {sessions.map(session => (
 
-                    <SessionCard key={session._id} session={session} />
+                    <SessionCard key={session._id} session={session} deleteSession={this.handleDeleteSession} />
 
 
                 ))}

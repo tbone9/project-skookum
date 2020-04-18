@@ -12,6 +12,7 @@ function SessionCard(props) {
                     <h3>Type: {props.session.type}</h3>
                     <h3>Duration: {props.session.duration}</h3>
                     <h3>Notes: {props.session.notes}</h3>
+                    <button onClick={() => props.deleteSession(props.session._id)}>Remove</button>
                 </>
                 : ''}
 

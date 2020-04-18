@@ -41,15 +41,15 @@ const editSession = async (e, sessionToUpdate, sessionId) => {
 
 const deleteSession = async (sessionId) => {
     try {
-        const session = await fetch(BASE_URL + sessionId, {
+        return fetch(BASE_URL + sessionId, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json',
+                // 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + tokenService.getToken()
             }
-        });
-        const response = await session.json();
-        return response;
+        }).then(res => res.json());
+        // const response = await session.json();
+        // return response;
     } catch (error) {
         console.log(error);
     }
