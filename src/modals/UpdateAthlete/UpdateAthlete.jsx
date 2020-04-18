@@ -2,19 +2,61 @@ import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
 
-class AddAthlete extends Component {
-    constructor() {
+class UpdateAthlete extends Component {
+    constructor(props) {
         super();
         this.state = {
-            firstName: '',
-            lastName: '',
-            dob: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: ''
+            firstName: props.athlete.firstName,
+            lastName: props.athlete.lastName,
+            dob: props.athlete.dob,
+            address: props.athlete.address,
+            city: props.athlete.city,
+            state: props.athlete.state,
+            zip: props.athlete.zip,
+            athleteId: props.athlete._id
         }
     }
+
+    static getDerivedStateFromProps(props, state) {
+        if (props.athlete._id !== state.athleteId) {
+            return {
+                firstName: props.athlete.firstName,
+                lastName: props.athlete.lastName,
+                dob: props.athlete.dob,
+                address: props.athlete.address,
+                city: props.athlete.city,
+                state: props.athlete.state,
+                zip: props.athlete.zip,
+                athleteId: props.athlete._id
+            }
+        }
+    }
+
+    // setInitialState = () => {
+    //     this.setState({
+    //         firstName: this.props.firstName,
+    //         lastName: this.props.lastName,
+    //         dob: this.props.dob,
+    //         address: this.props.address,
+    //         city: this.props.city,
+    //         state: this.props.state,
+    //         zip: this.props.zip,
+    //         athleteId: this.props.id
+    //     })
+    // }
+
+    // componentDidMount() {
+    //     this.setState({
+    //         firstName: this.props.firstName,
+    //         lastName: this.props.lastName,
+    //         dob: this.props.dob,
+    //         address: this.props.address,
+    //         city: this.props.city,
+    //         state: this.props.state,
+    //         zip: this.props.zip,
+    //         athleteId: this.props.id
+    //     });
+    // }
 
     handleChange = (e) => {
         this.setState({
@@ -23,28 +65,29 @@ class AddAthlete extends Component {
     }
 
     render() {
-        const showHideClassName = this.props.showAddAthlete ? 'modal display-block' : 'modal display-none';
+        const showHideClassName = this.props.showUpdateAthlete ? 'modal display-block' : 'modal display-none';
         return (
             <div className={showHideClassName}>
-                <form onSubmit={(e) => this.props.addAthlete(e, this.state)}>
+
+                <form onSubmit={(e) => this.props.updateAthlete(e, this.state)}>
 
                     <label htmlFor='firstName'>First Name: </label>
-                    <input required type='text' id='firstName' name='firstName' onChange={this.handleChange} />  <br></br>
+                    <input required type='text' id='firstName' name='firstName' value={this.state.firstName} onChange={this.handleChange} />  <br></br>
 
                     <label htmlFor='lastName'>Last Name: </label>
-                    <input required type='text' id='lastName' name='lastName' onChange={this.handleChange} />  <br></br>
+                    <input required type='text' id='lastName' name='lastName' value={this.state.lastName} onChange={this.handleChange} />  <br></br>
 
                     <label htmlFor='dob'>Date of Birth: </label>
-                    <input type='date' id='dob' name='dob' onChange={this.handleChange} />  <br></br>
+                    <input type='date' id='dob' name='dob' value={this.state.dob} onChange={this.handleChange} />  <br></br>
 
                     <label htmlFor='address'>Address: </label>
-                    <input type='text' id='address' name='address' onChange={this.handleChange} />  <br></br>
+                    <input type='text' id='address' name='address' value={this.state.address} onChange={this.handleChange} />  <br></br>
 
                     <label htmlFor='city'>City: </label>
-                    <input type='text' id='city' name='city' onChange={this.handleChange} />  <br></br>
+                    <input type='text' id='city' name='city' value={this.state.city} onChange={this.handleChange} />  <br></br>
 
                     <label htmlFor='state'>State: </label>
-                    <select id='state' name='state' onChange={this.handleChange}>
+                    <select id='state' name='state' value={this.state.state} onChange={this.handleChange}>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
                         <option value="AZ">Arizona</option>
@@ -99,14 +142,14 @@ class AddAthlete extends Component {
                     </select>  <br></br>
 
                     <label htmlFor='zip'>ZIP: </label>
-                    <input type='number' id='zip' name='zip' onChange={this.handleChange} />  <br></br>
+                    <input type='number' id='zip' name='zip' value={this.state.zip} onChange={this.handleChange} />  <br></br>
 
                     <div className='form-buttons'>
                         <div className='form-button'>
-                            <button type='submit' value='Add Athlete'>Add Athlete</button>
+                            <button type='submit' value='Update Athlete'>Update Athlete</button>
                         </div>
                         <div className='form-button'>
-                            <Link onClick={this.props.handleClose} to={`/`} >Cancel</Link>
+                            <Link onClick={this.props.handleClose} to={`/athlete/${this.props.athleteId}`} >Cancel</Link>
                         </div>
                     </div>
 
@@ -116,4 +159,4 @@ class AddAthlete extends Component {
     }
 }
 
-export default AddAthlete;
+export default UpdateAthlete;

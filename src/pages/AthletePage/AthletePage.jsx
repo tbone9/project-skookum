@@ -3,6 +3,7 @@ import athleteService from '../../utils/athleteService';
 import { Link } from 'react-router-dom';
 import SessionCard from '../../components/SessionCard/SessionCard';
 import AddSession from '../../modals/AddSession/AddSession';
+import UpdateAthlete from '../../modals/UpdateAthlete/UpdateAthlete';
 import userService from '../../utils/userService';
 import sessionService from '../../utils/sessionService';
 
@@ -13,7 +14,8 @@ class AthletePage extends Component {
             athlete: {},
             sessions: [],
             user: {},
-            showAddSession: false
+            showAddSession: false,
+            showUpdateAthlete: false,
         }
     }
 
@@ -51,6 +53,25 @@ class AthletePage extends Component {
 
     }
 
+    showUpdateAthlete = () => {
+        this.setState({ showUpdateAthlete: true })
+    }
+    hideUpdateAthlete = () => {
+        this.setState({ showUpdateAthlete: false })
+    }
+    updateAthlete = async (e, athleteToUpdate) => {
+        const athleteId = this.state.athlete._id;
+        e.preventDefault();
+        const athlete = await athleteService.editAthlete(e, athleteToUpdate, athleteId);
+        console.log(athlete, 'updated athlete');
+        this.hideUpdateAthlete();
+        this.setState((state) => {
+            return {
+                athlete: athlete.data
+            }
+        });
+    }
+
     render() {
         const athlete = this.state.athlete;
         const sessions = this.state.sessions;
@@ -62,10 +83,22 @@ class AthletePage extends Component {
                 <h3>Name: {athlete.firstName} {athlete.lastName}</h3>
                 <h3>Address: {athlete.address}</h3>
                 <h3>{athlete.city}, {athlete.state} {athlete.zip}</h3>
+
                 <button type='button' onClick={this.showAddSession}>Add Session</button>
+                <button type='button' onClick={this.showUpdateAthlete}>Update Athlete</button>
+
                 <h3>Training Sessions: </h3>
 
                 <AddSession addSession={this.addSession} showAddSession={this.state.showAddSession} handleClose={this.hideAddSession} user={this.state.user} athleteId={this.props.match.params.id} />
+
+                {this.state.athlete ?
+                    <UpdateAthlete
+                        athlete={this.state.athlete}
+                        updateAthlete={this.updateAthlete}
+                        handleClose={this.hideUpdateAthlete}
+                        showUpdateAthlete={this.state.showUpdateAthlete}
+                    />
+                    : ''}
 
                 {sessions ?
 

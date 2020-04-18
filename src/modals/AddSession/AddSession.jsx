@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../AddAthlete/styles.css';
+import '../styles.css';
 import userService from '../../utils/userService';
 import { Link } from 'react-router-dom';
 
@@ -24,12 +24,13 @@ class AddSession extends Component {
 
     render() {
         const showHideClassName = this.props.showAddSession ? 'modal display-block' : 'modal display-none';
+
         return (
             <div className={showHideClassName}>
                 <form onSubmit={(e) => this.props.addSession(e, this.state)}>
 
                     <label htmlFor='type'>Type of Session: </label>
-                    <input type='text' id='type' name='type' onChange={this.handleChange} />  <br></br>
+                    <input required type='text' id='type' name='type' onChange={this.handleChange} />  <br></br>
 
                     <label htmlFor='duration'>Duration: </label>
                     <input type='number' id='duration' name='duration' onChange={this.handleChange} />  <br></br>
