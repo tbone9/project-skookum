@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import athleteService from '../../utils/athleteService';
-import { Link } from 'react-router-dom';
+
+// ------ Components ----- //
 import SessionCard from '../../components/SessionCard/SessionCard';
 import AddSession from '../../modals/AddSession/AddSession';
 import UpdateAthlete from '../../modals/UpdateAthlete/UpdateAthlete';
+
+// ------- Services ------ //
+import athleteService from '../../utils/athleteService';
 import userService from '../../utils/userService';
 import sessionService from '../../utils/sessionService';
 
@@ -16,6 +19,7 @@ class AthletePage extends Component {
             user: {},
             showAddSession: false,
             showUpdateAthlete: false,
+            showSessionDetails: false
         }
     }
 
@@ -43,10 +47,7 @@ class AthletePage extends Component {
     addSession = async (e, session) => {
         e.preventDefault();
         const newSession = await sessionService.createSession(e, session);
-        console.log(newSession);
-        // const athlete = await athleteService.fetchAthlete(this.props.match.params.id);
         this.hideAddSession();
-        // console.log(athlete, 'athlete!!!');
         this.setState(prevState => ({
             sessions: [...prevState.sessions, newSession]
         }));
@@ -63,7 +64,6 @@ class AthletePage extends Component {
         const athleteId = this.state.athlete._id;
         e.preventDefault();
         const athlete = await athleteService.editAthlete(e, athleteToUpdate, athleteId);
-        console.log(athlete, 'updated athlete');
         this.hideUpdateAthlete();
         this.setState((state) => {
             return {
@@ -72,10 +72,15 @@ class AthletePage extends Component {
         });
     }
 
+    handleSessionDetails = () => {
+        this.setState(prevState => ({
+            showSessionDetails: !prevState.showSessionDetails
+        }))
+    }
+
     render() {
         const athlete = this.state.athlete;
         const sessions = this.state.sessions;
-        console.log(sessions, 'sessions')
         return (
             <div>
                 <h2>Athlete Page</h2>
@@ -100,14 +105,13 @@ class AthletePage extends Component {
                     />
                     : ''}
 
-                {sessions ?
+                {sessions.map(session => (
 
-                    sessions.map(session => (
+                    <SessionCard key={session._id} session={session} />
 
-                        <SessionCard key={session._id} session={session} />
-                    ))
-                    : ''
-                }
+
+                ))}
+
             </div>
         )
     }

@@ -6,6 +6,7 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import MainPage from '../MainPage/MainPage';
 import AthletePage from '../AthletePage/AthletePage';
+import SessionPage from '../SessionPage/SessionPage';
 
 //---- Utilities ----//
 import userService from '../../utils/userService';
@@ -62,6 +63,7 @@ class App extends Component {
           //     history={history}
           />
           } />
+          <Route exact path='/athlete/:id/session/:id' component={SessionPage} />
         </Switch>
 
       </div>
