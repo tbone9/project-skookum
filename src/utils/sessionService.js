@@ -1,5 +1,4 @@
 import tokenService from './tokenService';
-import athleteService from './athleteService';
 
 const BASE_URL = '/api/sessions/';
 

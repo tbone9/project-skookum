@@ -79,8 +79,6 @@ class AthletePage extends Component {
     }
 
     handleDeleteSession = async (sessionId) => {
-        // e.preventDefault();
-        // console.log(sessionId)
         await sessionService.deleteSession(sessionId);
         const newSessionArray = this.state.sessions.filter(session => session._id !== sessionId);
 
