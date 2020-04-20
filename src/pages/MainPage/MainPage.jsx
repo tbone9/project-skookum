@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LiveSearch from '../../components/LiveSearch/LiveSearch';
 
 // ------ components ------- //
 import NavBar from '../../components/NavBar/NavBar';
@@ -14,10 +15,12 @@ class MainPage extends Component {
         super();
         this.state = {
             athletes: [],
+            athlete: {},
             showAddAthlete: false
         }
     }
-    async componentDidMount() {
+
+    showAllAthletes = async () => {
         const athletes = await athleteService.fetchAthletes();
         this.setState({
             athletes: athletes.data
@@ -35,13 +38,18 @@ class MainPage extends Component {
     addAthlete = async (e, athlete) => {
         e.preventDefault();
         this.hideAddAthlete();
-        console.log(athlete);
         const newAthlete = await athleteService.createAthlete(e, athlete);
-        console.log(newAthlete);
         //this setState adds the new athlete without fetching from db
         this.setState(prevState => ({
             athletes: [...prevState.athletes, newAthlete]
         }));
+    }
+
+    searchAthletes = async (query) => {
+        const athletes = await athleteService.fetchAthleteQuery(query);
+        this.setState({
+            athletes: athletes.data
+        });
     }
 
 
@@ -54,15 +62,20 @@ class MainPage extends Component {
                 />
 
                 <h1>Main Page!</h1>
+
+                <LiveSearch searchAthletes={this.searchAthletes} />
+
                 <button type='button' onClick={this.showAddAthlete}>Add Athlete</button>
+                <button type='button' onClick={this.showAllAthletes}>Show All Athletes</button>
 
                 <AddAthlete addAthlete={this.addAthlete} showAddAthlete={this.state.showAddAthlete} handleClose={this.hideAddAthlete} />
 
                 <h2>Current Athletes</h2>
-
-                {this.state.athletes.map(athlete => (
-                    <AthleteCard key={athlete._id} athlete={athlete} />
-                ))}
+                {this.state.athletes ?
+                    this.state.athletes.map(athlete => (
+                        <AthleteCard history={this.props.history} key={athlete._id} athlete={athlete} />
+                    ))
+                    : ''}
             </div>
         )
     }

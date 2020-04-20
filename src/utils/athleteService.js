@@ -54,6 +54,22 @@ const fetchAthletes = async () => {
     }
 }
 
+const fetchAthleteQuery = async (query) => {
+    try {
+        const athletes = await fetch(BASE_URL + 'query/' + query, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
+            }
+        });
+        const response = await athletes.json();
+        return response;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 const editAthlete = async (e, athleteToUpdate, athleteId) => {
     e.preventDefault();
     try {
@@ -93,7 +109,8 @@ export default {
     fetchAthlete,
     fetchAthletes,
     editAthlete,
-    deleteAthlete
+    deleteAthlete,
+    fetchAthleteQuery
 };
 
 // module.exports.createAthlete = createAthlete;

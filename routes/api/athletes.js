@@ -13,6 +13,7 @@ router.use(require('../../config/auth'));
 router.post('/create', checkAuth, athletesCtrl.createAthlete);
 router.put('/:id', checkAuth, athletesCtrl.updateAthlete);
 router.delete('/:id', checkAuth, athletesCtrl.deleteAthlete);
+router.get(`/query/:firstName`, checkAuth, athletesCtrl.getAthleteQuery);
 
 /*----- Helper Functions -----*/
 function checkAuth(req, res, next) {
