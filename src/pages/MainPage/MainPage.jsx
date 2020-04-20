@@ -28,16 +28,12 @@ class MainPage extends Component {
     }
 
     showAddAthlete = () => {
-        this.setState({ showAddAthlete: true })
-    }
-
-    hideAddAthlete = () => {
-        this.setState({ showAddAthlete: false })
+        this.setState(prevState => ({ showAddAthlete: !prevState.showAddAthlete }))
     }
 
     addAthlete = async (e, athlete) => {
         e.preventDefault();
-        this.hideAddAthlete();
+        this.showAddAthlete();
         const newAthlete = await athleteService.createAthlete(e, athlete);
         //this setState adds the new athlete without fetching from db
         this.setState(prevState => ({
@@ -68,7 +64,7 @@ class MainPage extends Component {
                 <button type='button' onClick={this.showAddAthlete}>Add Athlete</button>
                 <button type='button' onClick={this.showAllAthletes}>Show All Athletes</button>
 
-                <AddAthlete addAthlete={this.addAthlete} showAddAthlete={this.state.showAddAthlete} handleClose={this.hideAddAthlete} />
+                <AddAthlete addAthlete={this.addAthlete} showAddAthlete={this.state.showAddAthlete} handleClose={this.showAddAthlete} />
 
                 <h2>Current Athletes</h2>
                 {this.state.athletes ?

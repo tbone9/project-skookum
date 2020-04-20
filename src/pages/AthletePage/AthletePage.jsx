@@ -36,18 +36,13 @@ class AthletePage extends Component {
     }
 
     showAddSession = () => {
-        this.setState({ showAddSession: true })
-    }
-
-    hideAddSession = () => {
-        this.setState({ showAddSession: false })
-
+        this.setState(prevState => ({ showAddSession: !prevState.showAddSession }))
     }
 
     addSession = async (e, session) => {
         e.preventDefault();
         const newSession = await sessionService.createSession(e, session);
-        this.hideAddSession();
+        this.showAddSession();
         this.setState(prevState => ({
             sessions: [...prevState.sessions, newSession]
         }));
@@ -55,16 +50,14 @@ class AthletePage extends Component {
     }
 
     showUpdateAthlete = () => {
-        this.setState({ showUpdateAthlete: true })
+        this.setState(prevState => ({ showUpdateAthlete: !prevState.showUpdateAthlete }))
     }
-    hideUpdateAthlete = () => {
-        this.setState({ showUpdateAthlete: false })
-    }
+
     updateAthlete = async (e, athleteToUpdate) => {
         const athleteId = this.state.athlete._id;
         e.preventDefault();
         const athlete = await athleteService.editAthlete(e, athleteToUpdate, athleteId);
-        this.hideUpdateAthlete();
+        this.showUpdateAthlete();
         this.setState((state) => {
             return {
                 athlete: athlete.data
@@ -103,13 +96,13 @@ class AthletePage extends Component {
 
                 <h3>Training Sessions: </h3>
 
-                <AddSession addSession={this.addSession} showAddSession={this.state.showAddSession} handleClose={this.hideAddSession} user={this.state.user} athleteId={this.props.match.params.id} />
+                <AddSession addSession={this.addSession} showAddSession={this.state.showAddSession} handleClose={this.showAddSession} user={this.state.user} athleteId={this.props.match.params.id} />
 
                 {this.state.athlete ?
                     <UpdateAthlete
                         athlete={this.state.athlete}
                         updateAthlete={this.updateAthlete}
-                        handleClose={this.hideUpdateAthlete}
+                        handleClose={this.showUpdateAthlete}
                         showUpdateAthlete={this.state.showUpdateAthlete}
                     />
                     : ''}
