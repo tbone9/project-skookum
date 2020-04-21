@@ -107,7 +107,7 @@ class AddAthlete extends Component {
                             <button type='submit' value='Add Athlete'>Add Athlete</button>
                         </div>
                         <div className='form-button'>
-                            <Link className='link' onClick={this.props.handleClose} to={`/`} >Cancel</Link>
+                            <Link className='link' onClick={this.props.handleClose} to='#' >Cancel</Link>
                         </div>
                     </div>
 

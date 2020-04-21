@@ -49,6 +49,10 @@ class MainPage extends Component {
         });
     }
 
+    makeAnError = () => {
+        throw new Error('OMG What Happened?')
+    }
+
 
     render() {
         return (

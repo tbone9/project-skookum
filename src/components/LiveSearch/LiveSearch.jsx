@@ -12,14 +12,15 @@ function LiveSearch(props) {
     return (
         <div className={styles.searchContainer}>
             <h2 className={styles.searchHeading}>Search for Athletes</h2>
+
             <form onSubmit={(e) => {
                 e.preventDefault();
-                // console.log(e.currentTarget);
                 props.searchAthletes(searchTerm)
             }} className={styles.searchForm}>
                 <input className={styles.searchInput} type='text' id='search-input' placeholder='Search' value={searchTerm} name='query' onChange={handleOnInputChange} />
                 <button type='submit' className={styles.searchButton} >Go</button>
             </form>
+
         </div >
     )
 }

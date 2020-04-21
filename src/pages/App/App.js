@@ -11,6 +11,7 @@ import SessionPage from '../SessionPage/SessionPage';
 //------Components------//
 import NavBar from '../../components/NavBar/NavBar';
 import Footer from '../../components/Footer/Footer';
+import ErrorBoundary from '../../components/ErrorBoundary/ErrorBoundary';
 
 //---- Utilities ----//
 import userService from '../../utils/userService';
@@ -49,10 +50,12 @@ class App extends Component {
 
             <Route exact path='/' render={() =>
               userService.getUser() ?
-                <MainPage
-                  user={this.state.user}
-                  handleLogout={this.handleLogout}
-                />
+                <ErrorBoundary>
+                  <MainPage
+                    user={this.state.user}
+                    handleLogout={this.handleLogout}
+                  />
+                </ErrorBoundary>
                 :
                 <Redirect to='/login' />
             } />
