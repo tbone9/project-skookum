@@ -4,31 +4,10 @@
 	color: #444;
 	text-align: center;
 }
-/*Container*/
-.searchContainer {
-	margin: 10px auto;
-	width: 100%;
-	max-width: 300px;
-}
 .searchForm {
 	display: flex;
 	flex-direction: row;
-	/* width: 300px; */
-	/* border: 1px solid grey; */
+	justify-content: center;
 	padding: 2px;
-}
-.searchInput{
-	flex-grow: 1;
-	border: none;
-	height: 30px;
-	background: lightgray;
-	
-}
-.searchInput:focus{
-	outline: none;
-}
-.searchButton {
-	/* border:1px solid red; */
-  	background:rgba(40, 154, 247, 0.788);
-  	color:white;
+	margin: 10px 0;
 }

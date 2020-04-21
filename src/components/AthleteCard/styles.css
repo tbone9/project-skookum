@@ -1,0 +1,12 @@
+
+.athlete-link {
+    text-decoration: none;
+    color: black;
+    background: lightgrey;
+    margin: 10px;
+    padding: 2px;
+}
+
+.athlete-link:hover {
+    background: white;
+}

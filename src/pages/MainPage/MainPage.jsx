@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+// ------ styles ---------//
+import { Button } from 'semantic-ui-react'
+
 // ------ components ------- //
 import LiveSearch from '../../components/LiveSearch/LiveSearch';
 import AthleteCard from '../../components/AthleteCard/AthleteCard';
@@ -54,14 +57,14 @@ class MainPage extends Component {
 
     render() {
         return (
-            <div className='mainPage'>
+            <div className={styles.MainPage}>
 
-                <h1>AthleteDB</h1>
+                <h1 className={styles.heading}>AthleteDB</h1>
 
                 <LiveSearch searchAthletes={this.searchAthletes} />
                 <div className='button-group'>
-                    <button className='app-buttons' type='button' onClick={this.showAddAthlete}>Add Athlete</button>
-                    <button className='app-buttons' type='button' onClick={this.showAllAthletes}>Show All Athletes</button>
+                    <Button inverted color='blue' type='button' onClick={this.showAddAthlete}>Add Athlete</Button>
+                    <Button inverted color='blue' type='button' onClick={this.showAllAthletes}>Show All Athletes</Button>
                 </div>
 
                 <AddAthlete addAthlete={this.addAthlete} showAddAthlete={this.state.showAddAthlete} handleClose={this.showAddAthlete} />

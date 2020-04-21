@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styles from './LiveSearch.module.css';
+import { Icon, Input } from 'semantic-ui-react'
+
 
 function LiveSearch(props) {
 
@@ -17,8 +19,8 @@ function LiveSearch(props) {
                 e.preventDefault();
                 props.searchAthletes(searchTerm)
             }} className={styles.searchForm}>
-                <input className={styles.searchInput} type='text' id='search-input' placeholder='Search' value={searchTerm} name='query' onChange={handleOnInputChange} />
-                <button type='submit' className={styles.searchButton} >Go</button>
+                <Input type='text' id='search-input' placeholder='Search for an athlete...' value={searchTerm} name='query' onChange={handleOnInputChange} />
+                <button type='submit' className='ui button' >Go</button>
             </form>
 
         </div >

@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './styles.css';
 
 function AthleteCard(props) {
     return (
-        <h3><Link history={props.history} to={`/athlete/${props.athlete._id}`}>{props.athlete.firstName} {props.athlete.lastName}</Link> - {props.athlete.city}, {props.athlete.state}</h3>
+        <Link className='athlete-link' history={props.history} to={`/athlete/${props.athlete._id}`}>
+            {props.athlete.firstName} {props.athlete.lastName} - {props.athlete.city}, {props.athlete.state}
+        </Link>
     )
 }
 

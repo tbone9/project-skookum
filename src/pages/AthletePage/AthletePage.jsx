@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AthletePage.module.css';
+import { Button } from 'semantic-ui-react';
 
 // ------ Components ----- //
 import SessionCard from '../../components/SessionCard/SessionCard';
@@ -117,8 +118,8 @@ class AthletePage extends Component {
                 <h3>{athlete.city}, {athlete.state} {athlete.zip}</h3>
 
                 <div className='button-group'>
-                    <button className='app-buttons' type='button' onClick={this.showAddSession}>Add Session</button>
-                    <button className='app-buttons' type='button' onClick={this.showUpdateAthlete}>Update Athlete</button>
+                    <Button inverted color='blue' type='button' onClick={this.showAddSession}>Add Session</Button>
+                    <Button inverted color='blue' type='button' onClick={this.showUpdateAthlete}>Update Athlete</Button>
                 </div>
 
                 <h3>Training Sessions: </h3>
