@@ -56,6 +56,7 @@ const fetchAthletes = async () => {
 
 const fetchAthleteQuery = async (query) => {
     try {
+        console.log(query, 'QUERY')
         const athletes = await fetch(BASE_URL + 'query/' + query, {
             method: 'GET',
             headers: {
@@ -63,10 +64,11 @@ const fetchAthleteQuery = async (query) => {
                 'Authorization': 'Bearer ' + tokenService.getToken()
             }
         });
+
         const response = await athletes.json();
         return response;
     } catch (error) {
-        console.error(error);
+        console.error(error, "ERROR!");
     }
 }
 

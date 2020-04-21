@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import LiveSearch from '../../components/LiveSearch/LiveSearch';
 
 // ------ components ------- //
-import NavBar from '../../components/NavBar/NavBar';
+import LiveSearch from '../../components/LiveSearch/LiveSearch';
+// import NavBar from '../../components/NavBar/NavBar';
 import AthleteCard from '../../components/AthleteCard/AthleteCard';
 import AddAthlete from '../../modals/AddAthlete/AddAthlete';
+// import Footer from '../../components/Footer/Footer';
 
 // import styles from './MainPage.module.css'
-
+import '../App/App.css';
 import athleteService from '../../utils/athleteService';
 
 class MainPage extends Component {
@@ -51,11 +52,7 @@ class MainPage extends Component {
 
     render() {
         return (
-            <div className='MainPage'>
-                <NavBar
-                    user={this.props.user}
-                    handleLogout={this.props.handleLogout}
-                />
+            <div className='mainPage'>
 
                 <h1>Main Page!</h1>
 
@@ -72,6 +69,7 @@ class MainPage extends Component {
                         <AthleteCard history={this.props.history} key={athlete._id} athlete={athlete} />
                     ))
                     : ''}
+
             </div>
         )
     }

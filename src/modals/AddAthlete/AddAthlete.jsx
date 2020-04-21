@@ -27,6 +27,7 @@ class AddAthlete extends Component {
         return (
             <div className={showHideClassName}>
                 <form onSubmit={(e) => this.props.addAthlete(e, this.state)}>
+                    <h3>Add an Athlete</h3>
 
                     <label htmlFor='firstName'>First Name: </label>
                     <input required type='text' id='firstName' name='firstName' onChange={this.handleChange} />  <br></br>
@@ -106,7 +107,7 @@ class AddAthlete extends Component {
                             <button type='submit' value='Add Athlete'>Add Athlete</button>
                         </div>
                         <div className='form-button'>
-                            <Link onClick={this.props.handleClose} to={`/`} >Cancel</Link>
+                            <Link className='link' onClick={this.props.handleClose} to={`/`} >Cancel</Link>
                         </div>
                     </div>
 

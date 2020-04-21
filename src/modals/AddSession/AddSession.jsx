@@ -43,7 +43,7 @@ class AddSession extends Component {
                             <button type='submit' value='Add Session'>Add Session</button>
                         </div>
                         <div className='form-button'>
-                            <Link onClick={this.props.handleClose} to={`/athlete/${this.props.athleteId}`} >Cancel</Link>
+                            <Link className='link' onClick={this.props.handleClose} to={`/athlete/${this.props.athleteId}`} >Cancel</Link>
                         </div>
                     </div>
 
