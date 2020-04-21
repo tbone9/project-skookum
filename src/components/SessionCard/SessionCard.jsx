@@ -4,10 +4,13 @@ import React, { useState } from 'react';
 function SessionCard(props) {
 
     const [showDetails, setShowDetails] = useState(false);
+    let date = props.session.date;
+    date = date.split('T');
+    date = date[0];
 
     return (
         <div>
-            <h3 onClick={() => setShowDetails(!showDetails)}>{props.session.date}</h3>
+            <h3 onClick={() => setShowDetails(!showDetails)}>{date}</h3>
             {showDetails ?
                 <>
                     <h3>Type: {props.session.type}</h3>

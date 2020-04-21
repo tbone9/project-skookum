@@ -15,6 +15,7 @@
 .main {
   background: lightcoral;
   grid-area: main;
+  padding-top: 5px;
 }
 
 .header {
@@ -26,4 +27,28 @@
 footer {
   grid-area: footer;
   background: lightblue;
+}
+
+.button-group {
+  /* padding-bottom: 10px; */
+  display: flex;
+  justify-content: space-evenly;
+  justify-items: center;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.app-buttons {
+  background: rgba(40, 154, 247, 0.788);
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  width: 120px;
+  border: none;
+  height: 30px;
+}
+
+.app-buttons:hover {
+  background: black;
+  cursor: 
 }

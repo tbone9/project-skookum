@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import styles from './AthletePage.module.css';
 
 // ------ Components ----- //
 import SessionCard from '../../components/SessionCard/SessionCard';
@@ -107,46 +109,49 @@ class AthletePage extends Component {
         const sessions = this.state.sessions;
         return (
             <div>
-                <h2>Athlete Page</h2>
+
+                <Link className='nav-link' to='/'>Back to Athletes</Link>
 
                 <h3>Name: {athlete.firstName} {athlete.lastName}</h3>
                 <h3>Address: {athlete.address}</h3>
                 <h3>{athlete.city}, {athlete.state} {athlete.zip}</h3>
 
-                <button type='button' onClick={this.showAddSession}>Add Session</button>
-                <button type='button' onClick={this.showUpdateAthlete}>Update Athlete</button>
+                <div className='button-group'>
+                    <button className='app-buttons' type='button' onClick={this.showAddSession}>Add Session</button>
+                    <button className='app-buttons' type='button' onClick={this.showUpdateAthlete}>Update Athlete</button>
+                </div>
 
                 <h3>Training Sessions: </h3>
 
                 <AddSession addSession={this.addSession} showAddSession={this.state.showAddSession} handleClose={this.showAddSession} user={this.state.user} athleteId={this.props.match.params.id} />
 
-                {this.state.showUpdateAthlete ?
-                    <UpdateAthlete
-                        athlete={this.state.athlete}
-                        updateAthlete={this.updateAthlete}
-                        handleClose={this.showUpdateAthlete}
-                        showUpdateAthlete={this.state.showUpdateAthlete}
-                    />
-                    : ''}
 
-                {this.state.showUpdateSession ?
-
-                    <UpdateSession
-                        updateSession={this.updateSession}
-                        session={this.state.currentSession}
-                        handleClose={this.showUpdateSession}
-                        showUpdateSession={this.state.showUpdateSession} />
-                    : ''}
-
-                {sessions.map(session => (
-
-                    <SessionCard
-                        key={session._id}
-                        session={session}
-                        deleteSession={this.handleDeleteSession} handleClose={this.showUpdateSession} showUpdateSession={this.state.showUpdateSession} />
+                <UpdateAthlete
+                    athlete={this.state.athlete}
+                    updateAthlete={this.updateAthlete}
+                    handleClose={this.showUpdateAthlete}
+                    showUpdateAthlete={this.state.showUpdateAthlete}
+                />
 
 
-                ))}
+
+
+                <UpdateSession
+                    updateSession={this.updateSession}
+                    session={this.state.currentSession}
+                    handleClose={this.showUpdateSession}
+                    showUpdateSession={this.state.showUpdateSession} />
+
+                <div className={styles.sessionGroup}>
+                    {sessions.map(session => (
+
+                        <SessionCard
+                            key={session._id}
+                            session={session}
+                            deleteSession={this.handleDeleteSession} handleClose={this.showUpdateSession} showUpdateSession={this.state.showUpdateSession} />
+
+                    ))}
+                </div>
 
 
 

@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 
 // ------ components ------- //
 import LiveSearch from '../../components/LiveSearch/LiveSearch';
-// import NavBar from '../../components/NavBar/NavBar';
 import AthleteCard from '../../components/AthleteCard/AthleteCard';
 import AddAthlete from '../../modals/AddAthlete/AddAthlete';
-// import Footer from '../../components/Footer/Footer';
 
-// import styles from './MainPage.module.css'
+import styles from './MainPage.module.css'
 import '../App/App.css';
 import athleteService from '../../utils/athleteService';
 
@@ -58,21 +56,25 @@ class MainPage extends Component {
         return (
             <div className='mainPage'>
 
-                <h1>Main Page!</h1>
+                <h1>AthleteDB</h1>
 
                 <LiveSearch searchAthletes={this.searchAthletes} />
-
-                <button type='button' onClick={this.showAddAthlete}>Add Athlete</button>
-                <button type='button' onClick={this.showAllAthletes}>Show All Athletes</button>
+                <div className='button-group'>
+                    <button className='app-buttons' type='button' onClick={this.showAddAthlete}>Add Athlete</button>
+                    <button className='app-buttons' type='button' onClick={this.showAllAthletes}>Show All Athletes</button>
+                </div>
 
                 <AddAthlete addAthlete={this.addAthlete} showAddAthlete={this.state.showAddAthlete} handleClose={this.showAddAthlete} />
 
-                <h2>Current Athletes</h2>
-                {this.state.athletes ?
-                    this.state.athletes.map(athlete => (
-                        <AthleteCard history={this.props.history} key={athlete._id} athlete={athlete} />
-                    ))
-                    : ''}
+                <div className={styles.athleteGroup}>
+                    {this.state.athletes ?
+                        this.state.athletes.map(athlete => (
+
+                            <AthleteCard history={this.props.history} key={athlete._id} athlete={athlete} />
+
+                        ))
+                        : ''}
+                </div>
 
             </div>
         )
