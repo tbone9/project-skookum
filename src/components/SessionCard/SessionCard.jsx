@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import UpdateSession from '../../modals/UpdateSession/UpdateSession';
 
 function SessionCard(props) {
 
@@ -12,6 +13,7 @@ function SessionCard(props) {
                     <h3>Type: {props.session.type}</h3>
                     <h3>Duration: {props.session.duration}</h3>
                     <h3>Notes: {props.session.notes}</h3>
+                    <button onClick={() => props.handleClose(props.session)}>Update Session</button>
                     <button onClick={() => props.deleteSession(props.session._id)}>Remove</button>
                 </>
                 : ''}

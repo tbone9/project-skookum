@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import SessionCard from '../../components/SessionCard/SessionCard';
 import AddSession from '../../modals/AddSession/AddSession';
 import UpdateAthlete from '../../modals/UpdateAthlete/UpdateAthlete';
+import UpdateSession from '../../modals/UpdateSession/UpdateSession';
 
 // ------- Services ------ //
 import athleteService from '../../utils/athleteService';
@@ -17,8 +18,10 @@ class AthletePage extends Component {
             athlete: {},
             sessions: [],
             user: {},
+            currentSession: {},
             showAddSession: false,
             showUpdateAthlete: false,
+            showUpdateSession: false,
             showSessionDetails: false
         }
     }
@@ -68,7 +71,7 @@ class AthletePage extends Component {
     handleSessionDetails = () => {
         this.setState(prevState => ({
             showSessionDetails: !prevState.showSessionDetails
-        }))
+        }));
     }
 
     handleDeleteSession = async (sessionId) => {
@@ -77,6 +80,25 @@ class AthletePage extends Component {
 
         this.setState({
             sessions: newSessionArray
+        });
+    }
+
+    showUpdateSession = (session) => {
+        this.setState(prevState => ({
+            showUpdateSession: !prevState.showUpdateSession,
+            currentSession: session
+        }));
+    }
+
+    updateSession = async (e, session, sessionId) => {
+        e.preventDefault();
+        const updatedSession = await sessionService.editSession(e, session, sessionId);
+        this.showUpdateSession();
+        let sessionsArr = this.state.sessions;
+        let index = sessionsArr.findIndex(x => x._id === sessionId);
+        sessionsArr[index] = updatedSession.data;
+        this.setState({
+            sessions: sessionsArr
         })
     }
 
@@ -98,7 +120,7 @@ class AthletePage extends Component {
 
                 <AddSession addSession={this.addSession} showAddSession={this.state.showAddSession} handleClose={this.showAddSession} user={this.state.user} athleteId={this.props.match.params.id} />
 
-                {this.state.athlete ?
+                {this.state.showUpdateAthlete ?
                     <UpdateAthlete
                         athlete={this.state.athlete}
                         updateAthlete={this.updateAthlete}
@@ -107,12 +129,26 @@ class AthletePage extends Component {
                     />
                     : ''}
 
+                {this.state.showUpdateSession ?
+
+                    <UpdateSession
+                        updateSession={this.updateSession}
+                        session={this.state.currentSession}
+                        handleClose={this.showUpdateSession}
+                        showUpdateSession={this.state.showUpdateSession} />
+                    : ''}
+
                 {sessions.map(session => (
 
-                    <SessionCard key={session._id} session={session} deleteSession={this.handleDeleteSession} />
+                    <SessionCard
+                        key={session._id}
+                        session={session}
+                        deleteSession={this.handleDeleteSession} handleClose={this.showUpdateSession} showUpdateSession={this.state.showUpdateSession} />
 
 
                 ))}
+
+
 
             </div>
         )

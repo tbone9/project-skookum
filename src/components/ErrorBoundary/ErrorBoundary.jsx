@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 
 class ErrorBoundary extends Component {
     state = {
-        error: ''
+        error: false
     }
 
     static getDerivedStateFromError(error) {
-        return { error: error.toString() };
+        return { error: true };
     }
 
     componentDidCatch(error, info) {
-        console.log(error.toString(), info.componentStack);
+        console.log(error);
+        console.log(info);
     }
 
     render() {
