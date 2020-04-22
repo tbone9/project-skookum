@@ -22,15 +22,12 @@
 }
 
 .header {
-  
   grid-area: header;
-  background: rebeccapurple;
 }
 
 footer {
   grid-area: footer;
   background:lightgrey;
-  /* margin: auto; */
   display: flex;
 }
 footer span {

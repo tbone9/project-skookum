@@ -8,7 +8,6 @@ import SessionCard from '../../components/SessionCard/SessionCard';
 import AddSession from '../../modals/AddSession/AddSession';
 import UpdateAthlete from '../../modals/UpdateAthlete/UpdateAthlete';
 import UpdateSession from '../../modals/UpdateSession/UpdateSession';
-import Footer from '../../components/Footer/Footer';
 
 // ------- Services ------ //
 import athleteService from '../../utils/athleteService';
@@ -26,7 +25,8 @@ class AthletePage extends Component {
             showAddSession: false,
             showUpdateAthlete: false,
             showUpdateSession: false,
-            showSessionDetails: false
+            showSessionDetails: false,
+            warnDelete: false
         }
     }
 
@@ -106,6 +106,20 @@ class AthletePage extends Component {
         })
     }
 
+    warnDelete = () => {
+        this.setState({
+            warnDelete: true
+        })
+    }
+
+    deleteAthlete = async () => {
+        await athleteService.deleteAthlete(this.state.athlete._id);
+        // this.setState({
+        //     warnDelete: false
+        // })
+        this.props.history.push('/');
+    }
+
     render() {
         const athlete = this.state.athlete;
         const sessions = this.state.sessions;
@@ -123,7 +137,14 @@ class AthletePage extends Component {
                 <div className={styles.buttonGroup}>
                     <Button inverted color='blue' type='button' onClick={this.showAddSession}>Add Session</Button>
                     <Button inverted color='blue' type='button' onClick={this.showUpdateAthlete}>Update Athlete</Button>
+                    {this.state.warnDelete ?
+                        <Button color='red' type='button' onClick={this.deleteAthlete}>Are you sure?</Button>
+                        :
+                        <Button color='blue' type='button' onClick={this.warnDelete}>Delete Athlete</Button>
+                    }
+
                 </div>
+
 
                 <h3>Training Sessions: </h3>
 
