@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
+import { Form, Input, Button, Label, TextArea } from 'semantic-ui-react';
 
 class UpdateSession extends Component {
     constructor(props) {
@@ -39,30 +40,32 @@ class UpdateSession extends Component {
 
         return (
             <div className={showHideClassName}>
-                <form onSubmit={(e) => this.props.updateSession(e, this.state, this.state.sessionId)}>
+                <Form onSubmit={(e) => this.props.updateSession(e, this.state, this.state.sessionId)}>
+
                     <h3>Update Session</h3>
-                    <label htmlFor='type'>Type of Session: </label>
-                    <input required type='text' id='type' name='type' value={this.state.type} onChange={this.handleChange} />  <br></br>
 
-                    <label htmlFor='duration'>Duration: </label>
-                    <input type='number' id='duration' name='duration' onChange={this.handleChange} value={this.state.duration} />  <br></br>
+                    <Label htmlFor='date'>Date: </Label>
+                    <Input type='date' id='date' name='date' onChange={this.handleChange} value={this.state.date} />  <br></br>
 
-                    <label htmlFor='date'>Date: </label>
-                    <input type='date' id='date' name='date' onChange={this.handleChange} value={this.state.date} />  <br></br>
+                    <Label htmlFor='type'>Type of Session: </Label>
+                    <Input required type='text' id='type' name='type' value={this.state.type} onChange={this.handleChange} />  <br></br>
 
-                    <label htmlFor='notes'>Notes: </label>
-                    <textarea cols='50' rows='10' type='date' id='notes' name='notes' onChange={this.handleChange} value={this.state.notes}></textarea>  <br></br>
+                    <Label htmlFor='duration'>Duration: </Label>
+                    <Input type='number' id='duration' name='duration' onChange={this.handleChange} value={this.state.duration} />  <br></br>
+
+                    <Label htmlFor='notes'>Notes: </Label>
+                    <TextArea cols='50' rows='10' type='date' id='notes' name='notes' onChange={this.handleChange} value={this.state.notes}></TextArea>  <br></br>
 
                     <div className='form-buttons'>
                         <div className='form-button'>
-                            <button type='submit' value='Add Session'>Update Session</button>
+                            <Button inverted color='blue' type='submit' value='Add Session'>Update Session</Button>
                         </div>
                         <div className='form-button'>
                             <Link className='link' onClick={this.props.handleClose} to='#' >Cancel</Link>
                         </div>
                     </div>
 
-                </form>
+                </Form>
             </div>
         )
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import userService from '../../utils/userService';
+import { Form, Input, Button } from 'semantic-ui-react';
 
 class SignupForm extends Component {
 
@@ -14,7 +15,7 @@ class SignupForm extends Component {
     handleChange = (e) => {
         this.props.updateMessage('');
         this.setState({
-            // Using ES2015 Computed Property Names
+
             [e.target.name]: e.target.value
         });
     }
@@ -23,12 +24,12 @@ class SignupForm extends Component {
         e.preventDefault();
         try {
             await userService.signup(this.state);
-            // Let <App> know a user has signed up!
+
             this.props.handleSignupOrLogin();
-            // Successfully signed up - show GamePage
+            // Successfully signed up - show MainPage
             this.props.history.push('/');
         } catch (err) {
-            // Invalid user data (probably duplicate email)
+
             this.props.updateMessage(err.message);
         }
     }
@@ -40,35 +41,35 @@ class SignupForm extends Component {
     render() {
         return (
             <div>
-                <header className="header-footer">Sign Up</header>
-                <form className="form-horizontal" onSubmit={this.handleSubmit} >
+                <h2 className="header-footer">Sign Up for AthleteDB</h2>
+                <Form className="form-horizontal" onSubmit={this.handleSubmit} >
                     <div className="form-group">
                         <div className="col-sm-12">
-                            <input required type="text" className="form-control" placeholder="Name" value={this.state.name} name="name" onChange={this.handleChange} />
+                            <Input required type="text" className="form-control" placeholder="Name" value={this.state.name} name="name" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12">
-                            <input required type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
+                            <Input required type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12">
-                            <input required type="password" className="form-control" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
+                            <Input required type="password" className="form-control" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12">
-                            <input required type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
+                            <Input required type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12 text-center">
-                            <button className="btn btn-default" disabled={this.isFormInvalid()}>Sign Up</button>&nbsp;&nbsp;
+                            <Button inverted color='blue' className="btn btn-default" disabled={this.isFormInvalid()}>Sign Up</Button>&nbsp;&nbsp;
               <Link to='/'>Cancel</Link>
                         </div>
                     </div>
-                </form>
+                </Form>
             </div>
         );
     }

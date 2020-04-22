@@ -3,10 +3,9 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* margin: 0 0 20px; */
   width: 100vw;
   height: 100%;
-  background: lightgrey;
+  background: rgba(255, 255, 255, 0.836);
 }
 
 .nav-user-group {
@@ -29,6 +28,15 @@
 }
 
 .nav-welcome {
-  color: grey;
-  float: right;
+  color: rgb(95, 95, 95);
+}
+
+.navHeader{
+  display: flex;
+}
+.navHeader span{
+  font-size: 14px;
+}
+.NavBar h1 {
+  color: rgb(2, 161, 253);
 }

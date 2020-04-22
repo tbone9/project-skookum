@@ -1,0 +1,12 @@
+.session-card-container {
+    border: 1px solid white;
+    margin: 5px;
+}
+
+.session-card-container h3 {
+    color: rgb(228, 83, 0);
+}
+
+.session-card-container:hover {
+    background: rgba(119, 136, 153, 0.432);
+}

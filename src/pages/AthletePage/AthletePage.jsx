@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AthletePage.module.css';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 
 // ------ Components ----- //
 import SessionCard from '../../components/SessionCard/SessionCard';
 import AddSession from '../../modals/AddSession/AddSession';
 import UpdateAthlete from '../../modals/UpdateAthlete/UpdateAthlete';
 import UpdateSession from '../../modals/UpdateSession/UpdateSession';
+import Footer from '../../components/Footer/Footer';
 
 // ------- Services ------ //
 import athleteService from '../../utils/athleteService';
@@ -109,15 +110,17 @@ class AthletePage extends Component {
         const athlete = this.state.athlete;
         const sessions = this.state.sessions;
         return (
-            <div>
+            <div className={styles.container}>
 
-                <Link className='nav-link' to='/'>Back to Athletes</Link>
+                <Link className={styles.navLink} to='/'><Icon aria-hidden='true' className='arrow alternate circle left outline huge' /></Link>
+
+                <h2>Athlete Details</h2>
 
                 <h3>Name: {athlete.firstName} {athlete.lastName}</h3>
                 <h3>Address: {athlete.address}</h3>
                 <h3>{athlete.city}, {athlete.state} {athlete.zip}</h3>
 
-                <div className='button-group'>
+                <div className={styles.buttonGroup}>
                     <Button inverted color='blue' type='button' onClick={this.showAddSession}>Add Session</Button>
                     <Button inverted color='blue' type='button' onClick={this.showUpdateAthlete}>Update Athlete</Button>
                 </div>
@@ -133,9 +136,6 @@ class AthletePage extends Component {
                     handleClose={this.showUpdateAthlete}
                     showUpdateAthlete={this.state.showUpdateAthlete}
                 />
-
-
-
 
                 <UpdateSession
                     updateSession={this.updateSession}
@@ -154,9 +154,7 @@ class AthletePage extends Component {
                     ))}
                 </div>
 
-
-
-            </div>
+            </div >
         )
     }
 }

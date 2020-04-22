@@ -6,7 +6,6 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import MainPage from '../MainPage/MainPage';
 import AthletePage from '../AthletePage/AthletePage';
-import SessionPage from '../SessionPage/SessionPage';
 
 //------Components------//
 import NavBar from '../../components/NavBar/NavBar';
@@ -77,8 +76,9 @@ class App extends Component {
             //     {...this.props}
             //     history={history}
             />
-          } />
-          <Route exact path='/athlete/:id/session/:id' component={SessionPage} />
+            } />
+
+
           </Switch>
         </div>
         <Footer className='footer' />

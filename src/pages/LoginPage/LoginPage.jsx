@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './LoginPage.css';
 import userService from '../../utils/userService';
+import { Form, Input, Button } from 'semantic-ui-react';
 
 class LoginPage extends Component {
 
@@ -34,26 +35,26 @@ class LoginPage extends Component {
     render() {
         return (
             <div className="LoginPage">
-                <header className="header-footer">Log In</header>
-                <form className="form-horizontal" onSubmit={this.handleSubmit} >
+                <h2 className="header-footer">Log In</h2>
+                <Form className="form-horizontal" onSubmit={this.handleSubmit} >
                     <div className="form-group">
                         <div className="col-sm-12">
-                            <input required type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
+                            <Input required type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12">
-                            <input required type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
+                            <Input required type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
                         </div>
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12 text-center">
-                            <button className="btn btn-default">Log In</button>&nbsp;&nbsp;&nbsp;
+                            <Button inverted color='blue' className="btn btn-default">Log In</Button>&nbsp;&nbsp;&nbsp;
               <Link to='/signup'>New user?</Link>
                             {/* <Link to='/'>Cancel</Link> */}
                         </div>
                     </div>
-                </form>
+                </Form>
             </div>
         );
     }

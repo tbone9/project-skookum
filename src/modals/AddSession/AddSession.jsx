@@ -31,6 +31,10 @@ class AddSession extends Component {
                 <Form className='ui form' onSubmit={(e) => this.props.addSession(e, this.state)}>
 
                     <h3>Add a Session</h3>
+
+                    <Label htmlFor='date'>Date: </Label>
+                    <Input type='date' id='date' name='date' onChange={this.handleChange} />  <br></br>
+
                     <Label htmlFor='type'>Type of Session: </Label>
                     <Input required type='text' id='type' name='type' onChange={this.handleChange} />  <br></br>
 

@@ -1,4 +1,15 @@
+.container {
+    /* border: 2px solid white; */
+    width: 50vw;
+    height: 100vh;
+}
+
 .sessionGroup {
-    height: 60vh;
+    max-height: 50%;
     overflow: scroll;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: center;
 }

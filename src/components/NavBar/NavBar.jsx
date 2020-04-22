@@ -8,15 +8,13 @@ const NavBar = (props) => {
 
 
             <div className='nav-welcome'>
-                <span >WELCOME, {props.user.name}</span>
+                <span >WELCOME, {props.user.name}, to AthleteDB</span>
                 <Link className='nav-link' to='' onClick={props.handleLogout}>Log Out</Link>
             </div>
         </div>
         :
-        <div>
-            <Link className='nav-link' to='/login' >LOG IN</Link>
-
-            <Link className='nav-link' to='/signup' >SIGN UP</Link>
+        <div className='navHeader'>
+            <h1>Welcome to AthleteDB!</h1>
         </div>;
 
     return (

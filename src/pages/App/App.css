@@ -8,17 +8,17 @@
     "main"
     "footer";
   grid-template-columns: 1fr;
-  grid-template-rows: 40px auto 30px;
-  /* overflow: hidden; */
+  grid-template-rows: 5vh 1fr 3vh;
+  overflow: hidden;
   background: #1f1f25;
   color: white;
 }
 
 .main {
-  /* background: lightcoral; */
   grid-area: main;
   padding-top: 5px;
   margin: 0 auto;
+  height: 100%;
 }
 
 .header {
@@ -30,6 +30,11 @@
 footer {
   grid-area: footer;
   background:lightgrey;
+  /* margin: auto; */
+  display: flex;
+}
+footer span {
+  color: gray;
 }
 
 .button-group {
@@ -53,4 +58,8 @@ footer {
 
 .app-buttons:hover {
   background: black;
+}
+
+h2 {
+  color: rgb(228, 83, 0);
 }

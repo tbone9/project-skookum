@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
-import { Modal, Input, Form, Label, Button } from 'semantic-ui-react'
+import { Input, Form, Label, Button } from 'semantic-ui-react'
 
 class AddAthlete extends Component {
     constructor() {
