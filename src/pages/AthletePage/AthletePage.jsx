@@ -97,15 +97,21 @@ class AthletePage extends Component {
     updateSession = async (e, session, sessionId) => {
         e.preventDefault();
         const updatedSession = await sessionService.editSession(e, session, sessionId);
+
         this.showUpdateSession();
         let sessionsArr = this.state.sessions;
+        console.log(sessionsArr);
+
         let index = sessionsArr.findIndex(x => x._id === sessionId);
         sessionsArr[index] = updatedSession.data;
+        console.log(sessionsArr);
         this.setState({
-            sessions: sessionsArr
-        })
+            sessions: [...this.state.sessions, ...updatedSession.data]
+        });
+
     }
 
+    // gives you a warning before you delete
     warnDelete = () => {
         this.setState({
             warnDelete: true
@@ -114,9 +120,6 @@ class AthletePage extends Component {
 
     deleteAthlete = async () => {
         await athleteService.deleteAthlete(this.state.athlete._id);
-        // this.setState({
-        //     warnDelete: false
-        // })
         this.props.history.push('/');
     }
 

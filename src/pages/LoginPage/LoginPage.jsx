@@ -32,6 +32,10 @@ class LoginPage extends Component {
         }
     }
 
+    isFormInvalid() {
+        return !(this.state.email && this.state.pw);
+    }
+
     render() {
         return (
             <div className="LoginPage">
@@ -49,7 +53,7 @@ class LoginPage extends Component {
                     </div>
                     <div className="form-group">
                         <div className="col-sm-12 text-center">
-                            <Button inverted color='blue' className="btn btn-default">Log In</Button>&nbsp;&nbsp;&nbsp;
+                            <Button inverted color='blue' className="btn btn-default" disabled={this.isFormInvalid()}>Log In</Button>&nbsp;&nbsp;&nbsp;
               <Link to='/signup'>New user?</Link>
                             {/* <Link to='/'>Cancel</Link> */}
                         </div>

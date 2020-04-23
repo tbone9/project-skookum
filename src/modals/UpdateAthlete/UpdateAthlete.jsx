@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
+import { Label, Form, Input, Button } from 'semantic-ui-react'
 
 class UpdateAthlete extends Component {
     constructor(props) {
@@ -40,29 +41,36 @@ class UpdateAthlete extends Component {
         })
     }
 
+    isFormInvalid() {
+        return !(this.state.firstName && this.state.lastName);
+    }
+
     render() {
         const showHideClassName = this.props.showUpdateAthlete ? 'modal display-block' : 'modal display-none';
         return (
             <div className={showHideClassName}>
 
-                <form onSubmit={(e) => this.props.updateAthlete(e, this.state)}>
+                <Form onSubmit={(e) => this.props.updateAthlete(e, this.state)}>
 
-                    <label htmlFor='firstName'>First Name: </label>
-                    <input required type='text' id='firstName' name='firstName' value={this.state.firstName || ''} onChange={this.handleChange} />  <br></br>
+                    <h3>Update Athlete</h3>
+                    <p> * = required </p>
 
-                    <label htmlFor='lastName'>Last Name: </label>
-                    <input required type='text' id='lastName' name='lastName' value={this.state.lastName || ''} onChange={this.handleChange} />  <br></br>
+                    <Label htmlFor='firstName'>* First Name: </Label>
+                    <Input required type='text' id='firstName' name='firstName' value={this.state.firstName || ''} onChange={this.handleChange} />  <br></br>
 
-                    <label htmlFor='dob'>Date of Birth: </label>
-                    <input type='date' id='dob' name='dob' value={this.state.dob || ''} onChange={this.handleChange} />  <br></br>
+                    <Label htmlFor='lastName'>* Last Name: </Label>
+                    <Input required type='text' id='lastName' name='lastName' value={this.state.lastName || ''} onChange={this.handleChange} />  <br></br>
 
-                    <label htmlFor='address'>Address: </label>
-                    <input type='text' id='address' name='address' value={this.state.address || ''} onChange={this.handleChange} />  <br></br>
+                    <Label htmlFor='dob'>Date of Birth: </Label>
+                    <Input type='date' id='dob' name='dob' value={this.state.dob || ''} onChange={this.handleChange} />  <br></br>
 
-                    <label htmlFor='city'>City: </label>
-                    <input type='text' id='city' name='city' value={this.state.city || ''} onChange={this.handleChange} />  <br></br>
+                    <Label htmlFor='address'>Address: </Label>
+                    <Input type='text' id='address' name='address' value={this.state.address || ''} onChange={this.handleChange} />  <br></br>
 
-                    <label htmlFor='state'>State: </label>
+                    <Label htmlFor='city'>City: </Label>
+                    <Input type='text' id='city' name='city' value={this.state.city || ''} onChange={this.handleChange} />  <br></br>
+
+                    <Label htmlFor='state'>State: </Label>
                     <select id='state' name='state' value={this.state.state || ''} onChange={this.handleChange}>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -117,19 +125,19 @@ class UpdateAthlete extends Component {
                         <option value="WY">Wyoming</option>
                     </select>  <br></br>
 
-                    <label htmlFor='zip'>ZIP: </label>
-                    <input type='number' id='zip' name='zip' value={this.state.zip || ''} onChange={this.handleChange} />  <br></br>
+                    <Label htmlFor='zip'>ZIP: </Label>
+                    <Input type='number' id='zip' name='zip' value={this.state.zip || ''} onChange={this.handleChange} />  <br></br>
 
                     <div className='form-buttons'>
                         <div className='form-button'>
-                            <button type='submit' value='Update Athlete'>Update Athlete</button>
+                            <Button inverted color='blue' type='submit' value='Update Athlete' disabled={this.isFormInvalid()}>Update Athlete</Button>
                         </div>
                         <div className='form-button'>
                             <Link to='#' className='link' onClick={this.props.handleClose}>Cancel</Link>
                         </div>
                     </div>
 
-                </form>
+                </Form>
             </div>
         )
     }

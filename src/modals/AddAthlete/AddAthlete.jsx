@@ -23,17 +23,22 @@ class AddAthlete extends Component {
         })
     }
 
+    isFormInvalid() {
+        return !(this.state.firstName && this.state.lastName);
+    }
+
     render() {
         const showHideClassName = this.props.showAddAthlete ? 'modal display-block' : 'modal display-none';
         return (
             <div className={showHideClassName}>
                 <Form onSubmit={(e) => this.props.addAthlete(e, this.state)}>
                     <h3>Add an Athlete</h3>
+                    <p> * = required </p>
 
-                    <Label className='ui label' htmlFor='firstName'>First Name: </Label>
+                    <Label className='ui label' htmlFor='firstName'>* First Name: </Label>
                     <Input required type='text' id='firstName' name='firstName' onChange={this.handleChange} />  <br></br>
 
-                    <Label htmlFor='lastName'>Last Name: </Label>
+                    <Label htmlFor='lastName'>* Last Name: </Label>
                     <Input required type='text' id='lastName' name='lastName' onChange={this.handleChange} />  <br></br>
 
                     <Label htmlFor='dob'>Date of Birth: </Label>
@@ -105,7 +110,7 @@ class AddAthlete extends Component {
 
                     <div className='form-buttons'>
                         <div>
-                            <Button inverted color='blue' type='submit' value='Add Athlete'>Add Athlete</Button>
+                            <Button inverted color='blue' type='submit' value='Add Athlete' disabled={this.isFormInvalid()}>Add Athlete</Button>
                         </div>
                         <div className='form-button'>
                             <Link className='link' onClick={this.props.handleClose} to='#' >Cancel</Link>

@@ -11,7 +11,8 @@ const SessionSchema = new mongoose.Schema({
         default: Date.now
     },
     duration: {
-        type: Number
+        type: Number,
+        required: true
     },
     notes: {
         type: String

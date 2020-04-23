@@ -19,8 +19,8 @@
   color: white;
   background: black;
   border-radius: 5px;
-  padding: 5px;
-  margin: 10px;
+  padding: 2px;
+  /* margin: 10px; */
 }
 .nav-link:hover{
   color: black;
