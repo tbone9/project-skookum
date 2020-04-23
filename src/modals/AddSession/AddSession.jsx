@@ -8,7 +8,7 @@ class AddSession extends Component {
     constructor() {
         super();
         this.state = {
-            type: '',
+            type: 'Strength',
             duration: 0,
             notes: '',
             createdBy: userService.getUser(),

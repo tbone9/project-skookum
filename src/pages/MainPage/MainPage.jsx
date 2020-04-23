@@ -67,7 +67,9 @@ class MainPage extends Component {
                     <Button inverted color='blue' type='button' onClick={this.showAllAthletes}>Show All Athletes</Button>
                 </div>
 
-                <AddAthlete addAthlete={this.addAthlete} showAddAthlete={this.state.showAddAthlete} handleClose={this.showAddAthlete} />
+                {this.state.showAddAthlete ?
+                    <AddAthlete addAthlete={this.addAthlete} showAddAthlete={this.state.showAddAthlete} handleClose={this.showAddAthlete} />
+                    : ''}
 
                 <div className={styles.athleteGroup}>
                     {this.state.athletes ?

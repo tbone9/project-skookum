@@ -15,6 +15,28 @@ class UpdateSession extends Component {
         }
     }
 
+    // componentDidMount() {
+    //     this.setState({
+    //         type: this.props.session.type,
+    //         duration: this.props.session.duration,
+    //         notes: this.props.session.notes,
+    //         date: this.props.session.date,
+    //         sessionId: this.props.session._id
+    //     })
+    // }
+
+    // componentDidUpdate() {
+    //     if (this.state.sessionId !== this.props.session._id) {
+    //         this.setState({
+    //             type: this.props.session.type,
+    //             duration: this.props.session.duration,
+    //             notes: this.props.session.notes,
+    //             date: this.props.session.date,
+    //             sessionId: this.props.session._id
+    //         })
+    //     }
+    // }
+
     static getDerivedStateFromProps(props, state) {
         if (props.session._id !== state.sessionId) {
             return {

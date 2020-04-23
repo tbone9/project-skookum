@@ -97,7 +97,7 @@ class AthletePage extends Component {
     updateSession = async (e, session, sessionId) => {
         e.preventDefault();
         const updatedSession = await sessionService.editSession(e, session, sessionId);
-
+        console.log(updatedSession.data, 'Data')
         this.showUpdateSession();
         let sessionsArr = this.state.sessions;
         console.log(sessionsArr);
@@ -105,8 +105,10 @@ class AthletePage extends Component {
         let index = sessionsArr.findIndex(x => x._id === sessionId);
         sessionsArr[index] = updatedSession.data;
         console.log(sessionsArr);
-        this.setState({
-            sessions: [...this.state.sessions, ...updatedSession.data]
+        this.setState((state) => {
+            return {
+                sessions: sessionsArr
+            }
         });
 
     }
@@ -151,21 +153,26 @@ class AthletePage extends Component {
 
                 <h3>Training Sessions: </h3>
 
-                <AddSession addSession={this.addSession} showAddSession={this.state.showAddSession} handleClose={this.showAddSession} user={this.state.user} athleteId={this.props.match.params.id} />
+                {this.state.showAddSession ?
+                    <AddSession addSession={this.addSession} showAddSession={this.state.showAddSession} handleClose={this.showAddSession} user={this.state.user} athleteId={this.props.match.params.id} />
+                    : ''}
 
+                {this.state.showUpdateAthlete ?
+                    <UpdateAthlete
+                        athlete={this.state.athlete}
+                        updateAthlete={this.updateAthlete}
+                        handleClose={this.showUpdateAthlete}
+                        showUpdateAthlete={this.state.showUpdateAthlete}
+                    />
+                    : ''}
 
-                <UpdateAthlete
-                    athlete={this.state.athlete}
-                    updateAthlete={this.updateAthlete}
-                    handleClose={this.showUpdateAthlete}
-                    showUpdateAthlete={this.state.showUpdateAthlete}
-                />
-
-                <UpdateSession
-                    updateSession={this.updateSession}
-                    session={this.state.currentSession}
-                    handleClose={this.showUpdateSession}
-                    showUpdateSession={this.state.showUpdateSession} />
+                {this.state.showUpdateSession ?
+                    <UpdateSession
+                        updateSession={this.updateSession}
+                        session={this.state.currentSession}
+                        handleClose={this.showUpdateSession}
+                        showUpdateSession={this.state.showUpdateSession} />
+                    : ''}
 
                 <div className={styles.sessionGroup}>
                     {sessions.map(session => (
