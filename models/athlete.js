@@ -29,7 +29,10 @@ const AthleteSchema = new mongoose.Schema({
     sessions: [{
         type: Schema.Types.ObjectId,
         ref: 'Session'
-    }]
+    }],
+    profileURL: {
+        type: String
+    }
 });
 
 

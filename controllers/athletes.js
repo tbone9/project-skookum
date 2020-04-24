@@ -1,5 +1,18 @@
 const Athlete = require('../models/athlete');
-const Session = require('../models/session')
+const Session = require('../models/session');
+// const multer = require('multer');
+// const upload = multer({ dest: 'uploads/' });
+
+// const addImage = async (req, res) => {
+//     try {
+//         const uploadTask = storage.ref
+//     } catch (error) {
+//         return res.sendStatus(500).json({
+//             success: false,
+//             error: 'Server Error'
+//         })
+//     }
+// }
 
 const createAthlete = async (req, res) => {
     try {
@@ -106,5 +119,6 @@ module.exports = {
     getOneAthlete,
     deleteAthlete,
     updateAthlete,
-    getAthleteQuery
+    getAthleteQuery,
+    // addImage
 };

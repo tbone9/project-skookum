@@ -5,6 +5,7 @@ const athletesCtrl = require('../../controllers/athletes');
 /*---------- Public Routes ----------*/
 router.get('/all', athletesCtrl.getAllAthletes);
 router.get('/:id', athletesCtrl.getOneAthlete);
+// router.put('/image', athletesCtrl.addImage);
 
 /*---------- Protected Routes ----------*/
 //need this bit just below for the checkAuth to work!!!

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
 import { Input, Form, Label, Button } from 'semantic-ui-react'
+// import storage from '../../utils/firebase';
 
 class AddAthlete extends Component {
     constructor() {
@@ -13,9 +14,52 @@ class AddAthlete extends Component {
             address: '',
             city: '',
             state: '',
-            zip: ''
+            zip: '',
+            // profileURL: '',
+            // image: null,
+            // progress: 0
         }
     }
+
+    // handleImageChange = e => {
+    //     if (e.target.files[0]) {
+    //         const image = e.target.files[0];
+    //         this.setState(() => ({ image }));
+
+    //     }
+    // }
+
+    // handleUpload = (e) => {
+    //     e.preventDefault();
+    //     const { image } = this.state;
+    //     console.log(image, 'IMAGE')
+    //     const uploadTask = storage.ref(`/images/${image.name}`).put(image);
+    //     uploadTask.on(
+    //         "state_changed",
+    //         snapshot => {
+    //             // progress function ...
+    //             const progress = Math.round(
+    //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //             );
+    //             this.setState({ progress });
+    //         },
+    //         error => {
+    //             // Error function ...
+    //             console.log(error);
+    //         },
+    //         () => {
+    //             // complete function ...
+    //             storage
+    //                 .ref("images")
+    //                 .child(image.name)
+    //                 .getDownloadURL()
+    //                 .then(url => {
+    //                     this.setState({ url });
+    //                 });
+    //         }
+    //     );
+
+    // };
 
     handleChange = (e) => {
         this.setState({
@@ -34,6 +78,11 @@ class AddAthlete extends Component {
                 <Form onSubmit={(e) => this.props.addAthlete(e, this.state)}>
                     <h3>Add an Athlete</h3>
                     <p> * = required </p>
+
+                    {/* <Label htmlFor='profileURL'>Upload a Profile Photo: </Label>
+                    <progress value={this.state.progress} max='100' />
+                    <Input type='file' onChange={this.handleImageChange} />
+                    <button onClick={this.handleUpload}>Upload Image</button> */}
 
                     <Label className='ui label' htmlFor='firstName'>* First Name: </Label>
                     <Input required type='text' id='firstName' name='firstName' onChange={this.handleChange} />  <br></br>
