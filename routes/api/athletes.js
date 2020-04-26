@@ -11,6 +11,7 @@ router.get('/:id', athletesCtrl.getOneAthlete);
 //need this bit just below for the checkAuth to work!!!
 router.use(require('../../config/auth'));
 
+router.get('/check/checkAuth', checkAuth, athletesCtrl.checkAuth);
 router.post('/create', checkAuth, athletesCtrl.createAthlete);
 router.put('/:id', checkAuth, athletesCtrl.updateAthlete);
 router.delete('/:id', checkAuth, athletesCtrl.deleteAthlete);

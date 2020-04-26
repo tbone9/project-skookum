@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
 import { Input, Form, Label, Button } from 'semantic-ui-react'
-import { storage, storageRef } from '../../utils/firebase';
+import { storage } from '../../utils/firebase';
+import athleteService from '../../utils/athleteService';
 
 class AddAthlete extends Component {
     constructor() {
@@ -21,7 +22,7 @@ class AddAthlete extends Component {
             errMsg: ''
         }
     }
-
+    // Prepares image for upload to firebase
     handleImageChange = e => {
         if (e.target.files[0]) {
             const image = e.target.files[0];
@@ -30,6 +31,7 @@ class AddAthlete extends Component {
                     image: image,
                     errMsg: ''
                 }));
+
                 this.handleUpload(image);
             } else {
                 this.setState({
@@ -39,36 +41,43 @@ class AddAthlete extends Component {
         }
 
     }
-
-    handleUpload = (image) => {
+    // Uploads image to firebase and keeps track of the progress
+    handleUpload = async (image) => {
+        const response = await athleteService.checkAuth();
+        console.log(response, 'RESPONSE!!!')
         // const { image } = this.state;
         console.log(image, 'IMAGE')
-        const uploadTask = storage.ref(`images/${image.name}`).put(image);
-        console.log(uploadTask, 'UPLOAD')
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                // progress function ...
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                );
-                this.setState({ progress });
-            },
-            error => {
-                // Error function ...
-                console.log(error);
-            },
-            () => {
-                // complete function ...
-                storage
-                    .ref("images")
-                    .child(image.name)
-                    .getDownloadURL()
-                    .then(url => {
-                        this.setState({ profileURL: url });
-                    });
-            }
-        );
+        if (response === 'It worked!') {
+
+            const uploadTask = storage.ref(`images/${image.name}`).put(image);
+            console.log(uploadTask, 'UPLOAD')
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    // progress function ...
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                    this.setState({ progress });
+                },
+                error => {
+                    // Error function ...
+                    console.log(error);
+                },
+                () => {
+                    // complete function ...
+                    storage
+                        .ref("images")
+                        .child(image.name)
+                        .getDownloadURL()
+                        .then(url => {
+                            this.setState({ profileURL: url });
+                        });
+                }
+            );
+        } else {
+            this.setState({ errMsg: 'Something went wrong!' })
+        }
 
     };
 

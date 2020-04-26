@@ -3,16 +3,16 @@ const Session = require('../models/session');
 // const multer = require('multer');
 // const upload = multer({ dest: 'uploads/' });
 
-// const addImage = async (req, res) => {
-//     try {
-//         const uploadTask = storage.ref
-//     } catch (error) {
-//         return res.sendStatus(500).json({
-//             success: false,
-//             error: 'Server Error'
-//         })
-//     }
-// }
+const checkAuth = async (req, res) => {
+    try {
+        const response = 'It worked!'
+        // console.log('SUECCES').then(res => res.json(response));
+        return res.json(response)
+    } catch (error) {
+        console.log(error);
+        return res.json('Error');
+    }
+};
 
 const createAthlete = async (req, res) => {
     try {
@@ -24,7 +24,7 @@ const createAthlete = async (req, res) => {
             error: 'Server Error'
         })
     }
-}
+};
 
 const getAllAthletes = async (req, res) => {
     try {
@@ -40,7 +40,7 @@ const getAllAthletes = async (req, res) => {
             error: 'Server Error'
         })
     }
-}
+};
 
 const getAthleteQuery = async (req, res) => {
     console.log(req.params, 'PARAMS')
@@ -53,7 +53,7 @@ const getAthleteQuery = async (req, res) => {
             error: 'Server Error'
         })
     }
-}
+};
 
 const getOneAthlete = async (req, res) => {
     try {
@@ -69,7 +69,7 @@ const getOneAthlete = async (req, res) => {
             msg: error
         })
     }
-}
+};
 
 const updateAthlete = async (req, res) => {
     try {
@@ -113,6 +113,8 @@ const deleteAthlete = async (req, res) => {
 }
 
 
+
+
 module.exports = {
     createAthlete,
     getAllAthletes,
@@ -120,5 +122,5 @@ module.exports = {
     deleteAthlete,
     updateAthlete,
     getAthleteQuery,
-    // addImage
+    checkAuth,
 };

@@ -106,13 +106,31 @@ const deleteAthlete = async (athleteId) => {
     }
 }
 
+const checkAuth = async () => {
+    try {
+        const check = await fetch(BASE_URL + 'check/checkAuth', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + tokenService.getToken()
+            }
+        });
+        const response = await check.json();
+        return response;
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export default {
     createAthlete,
     fetchAthlete,
     fetchAthletes,
     editAthlete,
     deleteAthlete,
-    fetchAthleteQuery
+    fetchAthleteQuery,
+    checkAuth
 };
 
 // module.exports.createAthlete = createAthlete;

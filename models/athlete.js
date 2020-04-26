@@ -31,7 +31,8 @@ const AthleteSchema = new mongoose.Schema({
         ref: 'Session'
     }],
     profileURL: {
-        type: String
+        type: String,
+        default: '../public/he-man-icon-22-128x128.png'
     }
 });
 
