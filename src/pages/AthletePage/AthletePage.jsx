@@ -8,7 +8,7 @@ import SessionCard from '../../components/SessionCard/SessionCard';
 import AddSession from '../../modals/AddSession/AddSession';
 import UpdateAthlete from '../../modals/UpdateAthlete/UpdateAthlete';
 import UpdateSession from '../../modals/UpdateSession/UpdateSession';
-import ProfileImage from '../../components/ProfileImage/ProfileImage';
+// import ProfileImage from '../../components/ProfileImage/ProfileImage';
 
 // ------- Services ------ //
 import athleteService from '../../utils/athleteService';
@@ -136,11 +136,12 @@ class AthletePage extends Component {
 
                 <h2>Athlete Details</h2>
 
-                <h3>Name: {athlete.firstName} {athlete.lastName}</h3>
+                <h3>{athlete.firstName} {athlete.lastName}</h3>
+                <img className={styles.profileImg} src={athlete.profileURL} alt='profile' />
                 <h3>Address: {athlete.address}</h3>
                 <h3>{athlete.city}, {athlete.state} {athlete.zip}</h3>
 
-                <ProfileImage />
+                {/* <ProfileImage /> */}
 
                 <div className={styles.buttonGroup}>
                     <Button inverted color='blue' type='button' onClick={this.showAddSession}>Add Session</Button>

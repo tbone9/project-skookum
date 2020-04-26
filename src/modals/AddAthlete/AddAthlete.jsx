@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
 import { Input, Form, Label, Button } from 'semantic-ui-react'
-// import storage from '../../utils/firebase';
+import { storage, storageRef } from '../../utils/firebase';
 
 class AddAthlete extends Component {
     constructor() {
@@ -15,51 +15,62 @@ class AddAthlete extends Component {
             city: '',
             state: '',
             zip: '',
-            // profileURL: '',
-            // image: null,
-            // progress: 0
+            profileURL: '',
+            image: null,
+            progress: 0,
+            errMsg: ''
         }
     }
 
-    // handleImageChange = e => {
-    //     if (e.target.files[0]) {
-    //         const image = e.target.files[0];
-    //         this.setState(() => ({ image }));
+    handleImageChange = e => {
+        if (e.target.files[0]) {
+            const image = e.target.files[0];
+            if (image.type === 'image/jpeg' && image.size < 2100000) {
+                this.setState(() => ({
+                    image: image,
+                    errMsg: ''
+                }));
+                this.handleUpload(image);
+            } else {
+                this.setState({
+                    errMsg: 'Upload is either too big or not an image!'
+                })
+            }
+        }
 
-    //     }
-    // }
+    }
 
-    // handleUpload = (e) => {
-    //     e.preventDefault();
-    //     const { image } = this.state;
-    //     console.log(image, 'IMAGE')
-    //     const uploadTask = storage.ref(`/images/${image.name}`).put(image);
-    //     uploadTask.on(
-    //         "state_changed",
-    //         snapshot => {
-    //             // progress function ...
-    //             const progress = Math.round(
-    //                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-    //             );
-    //             this.setState({ progress });
-    //         },
-    //         error => {
-    //             // Error function ...
-    //             console.log(error);
-    //         },
-    //         () => {
-    //             // complete function ...
-    //             storage
-    //                 .ref("images")
-    //                 .child(image.name)
-    //                 .getDownloadURL()
-    //                 .then(url => {
-    //                     this.setState({ url });
-    //                 });
-    //         }
-    //     );
+    handleUpload = (image) => {
+        // const { image } = this.state;
+        console.log(image, 'IMAGE')
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        console.log(uploadTask, 'UPLOAD')
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                // progress function ...
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                this.setState({ progress });
+            },
+            error => {
+                // Error function ...
+                console.log(error);
+            },
+            () => {
+                // complete function ...
+                storage
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        this.setState({ profileURL: url });
+                    });
+            }
+        );
 
-    // };
+    };
 
     handleChange = (e) => {
         this.setState({
@@ -79,10 +90,12 @@ class AddAthlete extends Component {
                     <h3>Add an Athlete</h3>
                     <p> * = required </p>
 
-                    {/* <Label htmlFor='profileURL'>Upload a Profile Photo: </Label>
-                    <progress value={this.state.progress} max='100' />
-                    <Input type='file' onChange={this.handleImageChange} />
-                    <button onClick={this.handleUpload}>Upload Image</button> */}
+                    <Label htmlFor='profileURL'>Profile Photo: &lt; 2mb </Label>
+                    <Input type='file' accept="image/*" onChange={this.handleImageChange} /><br></br>
+                    {this.state.errMsg ? <p>{this.state.errMsg}</p> :
+                        <progress value={this.state.progress} max='100' />
+                    }
+                    {/* <button onClick={this.handleUpload}>Upload Image</button> */}
 
                     <Label className='ui label' htmlFor='firstName'>* First Name: </Label>
                     <Input required type='text' id='firstName' name='firstName' onChange={this.handleChange} />  <br></br>

@@ -11,10 +11,12 @@ const firebaseConfig = {
     appId: "1:215186823320:web:5d30b9c9fa8a9984add8ed"
 };
 
+
+
 firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.storage();
-const storageRef = firebase.storage().ref();
+const storageRef = storage.ref();
 
 export {
     storage, storageRef, firebase as default

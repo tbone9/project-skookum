@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Input } from 'semantic-ui-react';
-import storage from '../../utils/firebase';
+import { storage, storageRef } from '../../utils/firebase';
 
 
 class ProfileImage extends Component {

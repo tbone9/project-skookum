@@ -13,3 +13,8 @@
     display: flex;
     justify-content: center;
 }
+
+.profileImg {
+    height: 100px;
+    border: 2px solid white;
+}
