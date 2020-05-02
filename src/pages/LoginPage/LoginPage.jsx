@@ -8,7 +8,10 @@ class LoginPage extends Component {
 
     state = {
         email: '',
-        pw: ''
+        pw: '',
+        password: '',
+        passwordConf: '',
+        login: true
     };
 
     handleChange = (e) => {
@@ -18,7 +21,7 @@ class LoginPage extends Component {
         });
     }
 
-    handleSubmit = async (e) => {
+    handleLogin = async (e) => {
         e.preventDefault();
         try {
             await userService.login(this.state);
@@ -32,34 +35,77 @@ class LoginPage extends Component {
         }
     }
 
-    isFormInvalid() {
+    isLoginInvalid() {
         return !(this.state.email && this.state.pw);
     }
 
+    changeToSignUp = () => {
+        this.setState({
+            login: false
+        })
+    }
+
+    handleSignup = async (e) => {
+        e.preventDefault();
+        try {
+            await userService.signup(this.state);
+
+            this.props.handleSignupOrLogin();
+            // Successfully signed up - show MainPage
+            this.props.history.push('/');
+        } catch (err) {
+
+            this.props.updateMessage(err.message);
+        }
+    }
+
+    isSignUpInvalid() {
+        return !(this.state.name && this.state.email && this.state.password === this.state.passwordConf);
+    }
+
     render() {
-        return (
-            <div className="LoginPage">
-                <h2 className="header-footer">Log In</h2>
-                <Form className="form-horizontal" onSubmit={this.handleSubmit} >
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                            <Input required type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
-                        </div>
+        const entryForm = this.state.login ?
+
+            <div className="login-container">
+                <h2 className="heading">Log In</h2>
+                <Form className="form-horizontal" onSubmit={this.handleLogin} >
+                    <div className="login-form-group">
+                        <Input required type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
+
+                        <Input required type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
+
                     </div>
-                    <div className="form-group">
-                        <div className="col-sm-12">
-                            <Input required type="password" className="form-control" placeholder="Password" value={this.state.pw} name="pw" onChange={this.handleChange} />
-                        </div>
+                    <div className="form-button-group">
+                        <Button inverted color='blue' disabled={this.isLoginInvalid()}>Log In</Button>
                     </div>
+                </Form>
+                <Button onClick={this.changeToSignUp} color='blue'>New User?</Button>
+            </div>
+            :
+            <div>
+                <h2 className="signup-heading">Sign Up</h2>
+                <Form onSubmit={this.handleSignup} >
                     <div className="form-group">
-                        <div className="col-sm-12 text-center">
-                            <Button inverted color='blue' className="btn btn-default" disabled={this.isFormInvalid()}>Log In</Button>&nbsp;&nbsp;&nbsp;
-              <Link to='/signup'>New user?</Link>
-                            {/* <Link to='/'>Cancel</Link> */}
-                        </div>
+                        <Input required type="text" className="form-control" placeholder="Name" value={this.state.name} name="name" onChange={this.handleChange} />
+
+                        <Input required type="email" className="form-control" placeholder="Email" value={this.state.email} name="email" onChange={this.handleChange} />
+
+                        <Input required type="password" className="form-control" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
+
+                        <Input required type="password" className="form-control" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
+
+                    </div>
+                    <div className="form-button-group">
+                        <Button inverted color='blue' className="btn btn-default" disabled={this.isSignUpInvalid()}>Sign Up</Button>
+                        <Link to='/'>Cancel</Link>
                     </div>
                 </Form>
             </div>
+
+        return (
+            <>
+                {entryForm}
+            </>
         );
     }
 }
