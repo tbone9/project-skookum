@@ -137,7 +137,7 @@ class AthletePage extends Component {
                 <h2>Athlete Details</h2>
 
                 <h3>{athlete.firstName} {athlete.lastName}</h3>
-                <img className={styles.profileImg} src={athlete.profileURL} alt='profile' />
+                {/* <img className={styles.profileImg} src={athlete.profileURL} alt='profile' /> */}
                 <h3>{athlete.address}</h3>
                 <h3>{athlete.city}, {athlete.state} {athlete.zip}</h3>
 

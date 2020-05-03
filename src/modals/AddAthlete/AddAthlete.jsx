@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import '../styles.css';
 import { Link } from 'react-router-dom';
 import { Input, Form, Label, Button } from 'semantic-ui-react'
-import { storage } from '../../utils/firebase';
-import athleteService from '../../utils/athleteService';
+// import { storage } from '../../utils/firebase';
+// import athleteService from '../../utils/athleteService';
 
 class AddAthlete extends Component {
     constructor() {
@@ -16,68 +16,73 @@ class AddAthlete extends Component {
             city: '',
             state: '',
             zip: '',
-            profileURL: '',
-            image: null,
-            progress: 0,
-            errMsg: ''
+
+            //FIREBASE
+            // profileURL: '',
+            // image: null,
+            // progress: 0,
+            // errMsg: ''
         }
     }
+    //FIREBASE
     // Prepares image for upload to firebase
-    handleImageChange = e => {
-        if (e.target.files[0]) {
-            const image = e.target.files[0];
-            if (image.type === 'image/jpeg' && image.size < 2100000) {
-                this.setState(() => ({
-                    image: image,
-                    errMsg: ''
-                }));
+    // handleImageChange = e => {
+    //     if (e.target.files[0]) {
+    //         const image = e.target.files[0];
+    //         if (image.type === 'image/jpeg' && image.size < 2100000) {
+    //             this.setState(() => ({
+    //                 image: image,
+    //                 errMsg: ''
+    //             }));
 
-                this.handleUpload(image);
-            } else {
-                this.setState({
-                    errMsg: 'Upload is either too big or not an image!'
-                })
-            }
-        }
+    //             this.handleUpload(image);
+    //         } else {
+    //             this.setState({
+    //                 errMsg: 'Upload is either too big or not an image!'
+    //             })
+    //         }
+    //     }
 
-    }
+    // }
+
+    //FIREBASE
     // Uploads image to firebase and keeps track of the progress
-    handleUpload = async (image) => {
+    // handleUpload = async (image) => {
 
-        const response = await athleteService.checkAuth();
+    //     const response = await athleteService.checkAuth();
 
-        if (response === 'It worked!') {
+    //     if (response === 'It worked!') {
 
-            const uploadTask = storage.ref(`images/${image.name}`).put(image);
-            uploadTask.on(
-                "state_changed",
-                snapshot => {
-                    // progress function ...
-                    const progress = Math.round(
-                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                    );
-                    this.setState({ progress });
-                },
-                error => {
-                    // Error function ...
-                    console.log(error);
-                },
-                () => {
-                    // complete function ...
-                    storage
-                        .ref("images")
-                        .child(image.name)
-                        .getDownloadURL()
-                        .then(url => {
-                            this.setState({ profileURL: url });
-                        });
-                }
-            );
-        } else {
-            this.setState({ errMsg: 'Something went wrong!' })
-        }
+    //         const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    //         uploadTask.on(
+    //             "state_changed",
+    //             snapshot => {
+    //                 // progress function ...
+    //                 const progress = Math.round(
+    //                     (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+    //                 );
+    //                 this.setState({ progress });
+    //             },
+    //             error => {
+    //                 // Error function ...
+    //                 console.log(error);
+    //             },
+    //             () => {
+    //                 // complete function ...
+    //                 storage
+    //                     .ref("images")
+    //                     .child(image.name)
+    //                     .getDownloadURL()
+    //                     .then(url => {
+    //                         this.setState({ profileURL: url });
+    //                     });
+    //             }
+    //         );
+    //     } else {
+    //         this.setState({ errMsg: 'Something went wrong!' })
+    //     }
 
-    };
+    // };
 
     handleChange = (e) => {
         this.setState({
@@ -97,11 +102,12 @@ class AddAthlete extends Component {
                     <h3>Add an Athlete</h3>
                     <p> * = required </p>
 
-                    <Label htmlFor='profileURL'>Profile Photo: &lt; 2mb </Label>
+                    {/* //FIREBASE */}
+                    {/* <Label htmlFor='profileURL'>Profile Photo: &lt; 2mb </Label>
                     <Input type='file' accept="image/*" onChange={this.handleImageChange} /><br></br>
                     {this.state.errMsg ? <p>{this.state.errMsg}</p> :
                         <progress value={this.state.progress} max='100' />
-                    }
+                    } */}
                     {/* <button onClick={this.handleUpload}>Upload Image</button> */}
 
                     <Label className='ui label' htmlFor='firstName'>* First Name: </Label>
