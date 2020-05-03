@@ -1,12 +1,25 @@
 
 .athlete-link {
     text-decoration: none;
-    color: black;
-    background: lightgrey;
+    color: white;
+    /* background: lightgrey; */
     margin: 10px;
-    padding: 2px;
+    /* padding: 2px; */
+
 }
 
+.card-container {
+    display: flex;
+    align-items: center;
+    width: 350px;
+    border: 2px solid rgb(2, 161, 253);
+}
 .athlete-link:hover {
-    background: white;
+    color: rgb(2, 161, 253);
+    background: rgba(189, 231, 255, 0.041)
+}
+
+
+.card-container span {
+    margin-left: 10px;
 }

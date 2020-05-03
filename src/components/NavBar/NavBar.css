@@ -18,13 +18,13 @@
   text-decoration: none;
   color: white;
   background: black;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 2px;
   /* margin: 10px; */
 }
 .nav-link:hover{
   color: black;
-  background: white;
+  background:rgb(2, 161, 253);
 }
 
 .nav-welcome {
@@ -39,4 +39,13 @@
 }
 .NavBar h1 {
   color: rgb(2, 161, 253);
+}
+
+#logOut {
+  position: absolute;
+  right: 0;
+}
+
+#heading{
+  font-weight: 700;
 }

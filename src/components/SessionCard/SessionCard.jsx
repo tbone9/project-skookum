@@ -12,12 +12,17 @@ function SessionCard(props) {
 
     return (
         <div className='session-card-container' onClick={() => setShowDetails(!showDetails)}>
-            <h3 >{date}</h3>
+            <span >{date}</span>
             {showDetails ?
                 <>
-                    <h3>Type: {props.session.type}</h3>
-                    <h3>Duration: {props.session.duration}</h3>
-                    <h3>Notes: {props.session.notes}</h3>
+                    <div className='session-details'>
+                        <div className='sub-details'>
+                            <span><strong>Type: </strong>{props.session.type}</span>
+                            <span><strong>Duration: </strong>{props.session.duration}</span>
+                        </div>
+
+                        <span><strong>Notes: </strong>{props.session.notes}</span>
+                    </div>
                     <Button inverted color='blue' onClick={() => props.handleClose(props.session)}>Update Session</Button>
                     <Button inverted color='blue' onClick={() => props.deleteSession(props.session._id)}>Remove</Button>
                 </>

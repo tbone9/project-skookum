@@ -43,6 +43,7 @@ class AddAthlete extends Component {
     }
     // Uploads image to firebase and keeps track of the progress
     handleUpload = async (image) => {
+
         const response = await athleteService.checkAuth();
 
         if (response === 'It worked!') {

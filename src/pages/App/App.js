@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 
 //---- Pages ----//
-import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import MainPage from '../MainPage/MainPage';
 import AthletePage from '../AthletePage/AthletePage';
@@ -58,11 +57,6 @@ class App extends Component {
                 :
                 <Redirect to='/login' />
             } />
-            <Route exact path='/signup' render={({ history }) =>
-              <SignupPage
-                history={history}
-                handleSignupOrLogin={this.handleSignupOrLogin}
-              />
             } />
             <Route exact path='/login' render={({ history }) =>
               <LoginPage
@@ -76,9 +70,7 @@ class App extends Component {
             //     {...this.props}
             //     history={history}
             />
-            } />
-
-
+            }
           </Switch>
         </div>
         <Footer className='footer' />
