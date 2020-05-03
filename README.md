@@ -34,13 +34,13 @@ Improved code organization with increased separation of concerns in React, with 
 ### Screenshots
 
 Login:
-![login page](https://imgur.com/ljc0vKJ)
+![login page](https://i.imgur.com/ljc0vKJ.png)
 
 Sign Up: 
-![sign up page](https://imgur.com/mvxYCph)
+![sign up page](https://i.imgur.com/mvxYCph.png)
 
 Main Page: 
-![main page](https://imgur.com/qgAbnPE)
+![main page](https://i.imgur.com/qgAbnPE.png)
 
 Athlete Page: 
-![athlete page](https://imgur.com/PSb8MCF)
+![athlete page](https://i.imgur.com/PSb8MCF.png)
