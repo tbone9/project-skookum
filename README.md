@@ -4,6 +4,8 @@
 
 ### AthleteDB keeps track of athletes and their athletic training progress. 
 
+[Live Site](https://project-skookum.herokuapp.com/)
+
 ### User Stories
 
 1. A user can register themselves and access the site.
@@ -28,3 +30,17 @@ Improved code organization with increased separation of concerns in React, with 
 4. Enable profile image uploading with more secure Firebase settings, or possibly AWS S3. 
 5. Make registration requirements more robust, and enable some kind of way to reset the password for each user. 
 6. Allow for athletes to be separated into groups by sport or coach or other ways. 
+
+### Screenshots
+
+Login:
+(https://imgur.com/ljc0vKJ)
+
+Sign Up: 
+(https://imgur.com/mvxYCph)
+
+Main Page: 
+(https://imgur.com/qgAbnPE)
+
+Athlete Page: 
+(https://imgur.com/PSb8MCF)
